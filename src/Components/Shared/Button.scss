@@ -1,0 +1,27 @@
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    border: 2px solid #343090;
+    background: #FFFFFF;
+    color: #343090;
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: 0.75rem;
+    border-radius: 2rem;
+    
+    &.filled {
+        background: #343090;
+        color: #FFFFFF;
+        &:hover {
+            background: rgba(#343090, 0.9)
+        }
+    }
+
+    &:hover {
+        background: rgba(#343090, 0.1);
+    }
+    &:focus {
+        outline: none;
+    }
+}

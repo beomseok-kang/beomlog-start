@@ -1,0 +1,25 @@
+.dialog {
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    background: #86d84f;
+    button {
+        float: right;
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: rgba(#000000,0);
+        color: #000000;
+    }
+    h2 {
+        margin: 0;
+        font-size: 1.25rem;
+    }
+    p {
+        margin: 0;
+        font-size: 1rem;
+    }
+    margin-bottom: 1rem;
+    &.warning {
+        background: #e7581f;
+    }
+}
