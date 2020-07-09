@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import Input from '../../Components/Shared/Input';
 import Button from '../../Components/Shared/Button';
 import './FormContainer.scss';
+import { signIn } from '../../api/firebase';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loadDialog } from '../../Modules/dialog';
-import { signUp, signIn } from '../../api/firebase';
-import { useHistory } from 'react-router-dom';
 
 type FormValue = {
     email: string;
@@ -15,10 +15,26 @@ type FormValue = {
 function FormContainer() {
 
     const routerHistory = useHistory();
-
-    /////// reducerState ///////////////
-
     const dispatch = useDispatch();
+
+    const dispatchSignInSuccessDialog = () => {
+        dispatch(
+            loadDialog(
+                'success',
+                'Signed In',
+                'You are signed in successfully.'
+            )
+        );
+    };
+    const dispatchSignInWarningDialog = () => {
+        dispatch(
+            loadDialog(
+                'warning',
+                'Error',
+                'There was an error signing you in. Please try again.'
+            )
+        );
+    };
 
     /////// useState ///////////////////
 
@@ -38,33 +54,14 @@ function FormContainer() {
             setIsValid(true);
             try {
                 await signIn(values.email, values.password);
-                dispatch(
-                    loadDialog(
-                        'success',
-                        'Signed In',
-                        'You are signed in successfully.'
-                    )
-                );
+                dispatchSignInSuccessDialog();
                 routerHistory.push({ pathname: '/home' });
             } catch (e) {
-                dispatch(
-                    loadDialog(
-                        'warning',
-                        'Error',
-                        'There was an error signing you in. Please try again.'
-                    )
-                );
+                dispatchSignInWarningDialog();
             }
         } else {
             setIsValid(false);
-            console.log('wrong input');
-            dispatch(
-                loadDialog(
-                    'warning',
-                    'Error',
-                    'There was an error signing you in. Please try again.'
-                )
-            );
+            dispatchSignInWarningDialog();
         }
         setValues(initialValuesState);
     }
@@ -72,7 +69,7 @@ function FormContainer() {
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValues({
             ...values,
-            [event.target.type]: event.target.value
+            [event.target.id]: event.target.value
         });
     }
 
@@ -80,6 +77,7 @@ function FormContainer() {
     <form onSubmit={onSubmit}>
         <div className="input-container">
             <Input
+                id="email"
                 onChange={onChange}
                 value={values.email}
                 type="email"
@@ -87,6 +85,7 @@ function FormContainer() {
                 isValid={isValid}
             />
             <Input
+                id="password"
                 onChange={onChange}
                 value={values.password}
                 type="password"
@@ -96,9 +95,6 @@ function FormContainer() {
         </div>
         <div className="button-container">
             <Button type="submit" isFilled>Sign In</Button>
-        </div>
-        <div className="button-container">
-            <Button type="button">Sign Up</Button>
         </div>
     </form>
     );

@@ -1,39 +1,20 @@
 import firebase from 'firebase';
 import 'firebase/firestore';
-// import { useDispatch } from 'react-redux';
-
-
-// ///////////// dispatch / redux //////////////////////////
-
-// const 
-// const dispatch = useDispatch();
-
-///////////// initialize app //////////////////////////
-
-const firebaseConfig = {
-    apiKey: "AIzaSyA9k7r-SspAyi_JU1LQ3e8aIFLqZ93oay8",
-    authDomain: "beomlog-4157c.firebaseapp.com",
-    databaseURL: "https://beomlog-4157c.firebaseio.com",
-    projectId: "beomlog-4157c",
-    storageBucket: "beomlog-4157c.appspot.com",
-    messagingSenderId: "130805323864",
-    appId: "1:130805323864:web:bbcec3822a13a38139922d",
-    measurementId: "G-KT4F1VCYFG"
-};
-
-export const useFb = () => {
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
-};
+import { db } from '../App';
 
 ///////////// authentication /////////////////////////
 
-export const signUp = async (email: string, password: string) => {
+export const signUp = async (email: string, password: string, userData: UserData) => {
     await firebase.auth().createUserWithEmailAndPassword(email, password)
         .catch(function(error) {
             throw new Error(error);
         });
-    console.log(firebase.auth().currentUser);
+    if(firebase.auth().currentUser?.uid) {
+        await createUserData(
+        firebase.auth().currentUser?.uid,
+        userData
+        );
+    }
     return firebase.auth().currentUser;
 };
 
@@ -51,4 +32,33 @@ export const signOut = async () => {
         throw new Error(error);
     });
     console.log('signed out');
+}
+
+//////////////// firestore //////////////////////////////////
+
+//userData
+
+type UserData = {
+    email: string;
+    name: string;
+    imgUrl: string;
+}
+
+export const createUserData = async (uid: string | undefined, userData: UserData) => {
+    await db.collection('user').doc(uid).set(userData)
+}
+
+// export const getUserData = async (uid: string) => {
+//     await db.collection('user').doc(uid).get()
+// }
+
+export const getUserDataOnSnapshot = (uid: string) => {
+    const doc =  db.collection('user').doc(uid);
+    let snapshot: any = null;
+    let observer = doc.onSnapshot(docSnapshot => {
+        snapshot = docSnapshot;
+    }, err => {
+    console.log(`Encountered error: ${err}`);
+    });
+    return snapshot;
 }

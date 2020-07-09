@@ -1,20 +1,20 @@
 import React from 'react';
 import './LoginPage.scss';
-import FormContainer from '../Container/Login/FormContainer';
+import RegisterFormContainer from '../Container/Register/RegisterFormContainer';
 import { Link } from 'react-router-dom';
 
-function LoginPage() {
+function RegisterPage () {
     return (
         <div className="login-page">
             <div className="inner">
                 <h1>Beomlog</h1>
-                <FormContainer />
+                <RegisterFormContainer />
                 <div className="link-to-container">
-                    Don't have an account? <Link to="/auth/register">Sign Up</Link>
+                    Already have an account? <Link to="/auth">Sign In</Link>
                 </div>
             </div>
         </div>
     );
 }
 
-export default LoginPage;
+export default RegisterPage;

@@ -2,6 +2,7 @@ import React from 'react';
 import './Input.scss';
 
 type InputProps = {
+    id: string;
     value: string;
     type: string;
     placeholder: string;
@@ -9,11 +10,12 @@ type InputProps = {
     isValid: boolean | null;
 }
 
-function Input({ value, type, placeholder, onChange, isValid }: InputProps) {
+function Input({ id, value, type, placeholder, onChange, isValid }: InputProps) {
 
     return (
         <div>
             <input
+                id={id}
                 type={type}
                 value={value}
                 onChange={onChange}
