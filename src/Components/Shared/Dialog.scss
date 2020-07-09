@@ -2,24 +2,52 @@
     padding: 1rem 2rem;
     border-radius: 2rem;
     background: #86d84f;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    animation-name: appear;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
     button {
         float: right;
         margin: 0;
         padding: 0;
         border: none;
         background: rgba(#000000,0);
-        color: #000000;
     }
     h2 {
         margin: 0;
         font-size: 1.25rem;
+        font-weight: 700;
     }
     p {
         margin: 0;
         font-size: 1rem;
+        font-weight: 500;
     }
-    margin-bottom: 1rem;
     &.warning {
         background: #e7581f;
+        color: #FFFFFF;
+    }
+}
+
+@keyframes appear {
+    0% {
+        display: block;
+        opacity: 0.5;
+    }
+    15% {
+        opacity: 1;
+    }
+    30% {
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    } 
+    85% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
     }
 }

@@ -3,7 +3,9 @@ import Input from '../../Components/Shared/Input';
 import Button from '../../Components/Shared/Button';
 import './FormContainer.scss';
 import { useDispatch } from 'react-redux';
-import { loadDialog } from '../../Modules/dialog'
+import { loadDialog } from '../../Modules/dialog';
+import { signUp, signIn } from '../../api/firebase';
+import { useHistory } from 'react-router-dom';
 
 type FormValue = {
     email: string;
@@ -11,6 +13,8 @@ type FormValue = {
 }
 
 function FormContainer() {
+
+    const routerHistory = useHistory();
 
     /////// reducerState ///////////////
 
@@ -28,18 +32,29 @@ function FormContainer() {
 
     /////// functions /////////////////
 
-    const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if(values.password.length >= 8) {
             setIsValid(true);
-            console.log(values);
-            dispatch(
-                loadDialog(
-                    'success',
-                    'Signed In',
-                    'You are signed in successfully.'
-                )
-            );
+            try {
+                await signIn(values.email, values.password);
+                dispatch(
+                    loadDialog(
+                        'success',
+                        'Signed In',
+                        'You are signed in successfully.'
+                    )
+                );
+                routerHistory.push({ pathname: '/home' });
+            } catch (e) {
+                dispatch(
+                    loadDialog(
+                        'warning',
+                        'Error',
+                        'There was an error signing you in. Please try again.'
+                    )
+                );
+            }
         } else {
             setIsValid(false);
             console.log('wrong input');
