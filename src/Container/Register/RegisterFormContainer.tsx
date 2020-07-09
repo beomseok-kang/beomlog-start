@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { signUp } from '../../api/firebase';
 import { loadDialog } from '../../Modules/dialog';
 import Button from '../../Components/Shared/Button';
+import Loader from '../../Components/Shared/Loader';
 
 type RegisterFormValue = {
     name: string;
@@ -51,6 +52,7 @@ function RegisterFormContainer() {
 
     const [values,setValues] = useState<RegisterFormValue>(initialValueState);
     const [isValid, setIsValid] = useState<boolean | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [matchPassword, setMatchPassword] = useState<boolean>(false);
 
     ///////// functions //////////////////////////////
@@ -76,6 +78,7 @@ function RegisterFormContainer() {
             && values.name.length >= 2
             && matchPassword) {
                 setIsValid(true);
+                setIsLoading(true);
                 try {
                     await signUp(
                         values.email,
@@ -86,10 +89,12 @@ function RegisterFormContainer() {
                             imgUrl: URL_TEMPORARY
                         }
                     );
+                    setIsLoading(false);
                     dispatchSignUpSuccessDialog();
                     routerHistory.push({ pathname: '/home' });
                 } catch (e) {
                     console.log(e);
+                    setIsLoading(false);
                     dispatchSignUpWarningDialog();
                 }
                 setValues(initialValueState);
@@ -109,7 +114,9 @@ function RegisterFormContainer() {
     
 
     return (
-        <form onSubmit={onSubmit}>
+        isLoading
+        ? <Loader />
+        : <form onSubmit={onSubmit}>
             <div className="input-container">
                 <Input
                     id="name"

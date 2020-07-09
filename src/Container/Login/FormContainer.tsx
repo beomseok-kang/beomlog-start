@@ -6,6 +6,7 @@ import { signIn } from '../../api/firebase';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loadDialog } from '../../Modules/dialog';
+import Loader from '../../Components/Shared/Loader';
 
 type FormValue = {
     email: string;
@@ -45,6 +46,7 @@ function FormContainer() {
 
     const [values, setValues] = useState<FormValue>(initialValuesState);
     const [isValid, setIsValid] = useState<boolean | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     /////// functions /////////////////
 
@@ -52,12 +54,15 @@ function FormContainer() {
         event.preventDefault();
         if(values.password.length >= 8) {
             setIsValid(true);
+            setIsLoading(true);
             try {
                 await signIn(values.email, values.password);
                 dispatchSignInSuccessDialog();
+                setIsLoading(false);
                 routerHistory.push({ pathname: '/home' });
             } catch (e) {
                 dispatchSignInWarningDialog();
+                setIsLoading(false);
             }
         } else {
             setIsValid(false);
@@ -74,7 +79,9 @@ function FormContainer() {
     }
 
     return (
-    <form onSubmit={onSubmit}>
+    isLoading
+    ? <Loader />
+    : <form onSubmit={onSubmit}>
         <div className="input-container">
             <Input
                 id="email"
