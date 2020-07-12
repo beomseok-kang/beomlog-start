@@ -1,0 +1,29 @@
+.user-info-wrapper {
+    display: none;
+    width: 16rem;
+    border-radius: 4px;
+    box-shadow: 0 3px 20px rgba(#343090, 0.3);
+    background: #FFFFFF;
+
+    h3 {
+        margin: 1rem auto;
+        text-align: center;
+        font-size: 1.25rem;
+    }
+    p {
+        margin: 1rem auto;
+        text-align: center;
+        font-size: 1rem;
+    }
+    .user-info-button-wrapper {
+        width: max-content;
+        margin: 0 auto;
+        margin-bottom: 1rem;
+    }
+    &.on {
+        display: block;
+        position: absolute;
+        right: 1rem;
+        top: 120%;
+    }
+}

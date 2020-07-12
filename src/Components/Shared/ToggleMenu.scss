@@ -1,0 +1,104 @@
+.toggle-menu-wrapper {
+    position: fixed;
+    left: 0; top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0);
+    &.on {
+        animation-name: darkenbg;
+        animation-duration: 0.4s;
+        animation-fill-mode: forwards;
+    }
+    &.off {
+        animation-name: lightenbg;
+        animation-duration: 0.4s;
+        animation-fill-mode: forwards;
+    }
+    
+    ul.category-list {
+        position: absolute;
+        background: #FFFFFF;
+        width: 20rem;
+        left: 0; top: 0;
+        height: 100%;
+        transform: translate(-20rem, 0);
+        box-shadow: 0 3px 20px rgba(#343090, 0.3);
+        list-style: none;
+        padding: 5rem 0 0;
+        box-sizing: border-box;
+        margin: 0;
+        &.on {
+            animation-name: showmenu;
+            animation-duration: 0.4s;
+            animation-fill-mode: forwards;
+        }
+        &.off {
+            animation-name: hidemenu;
+            animation-duration: 0.4s;
+            animation-fill-mode: forwards;
+        }
+        a {
+            display: flex;
+            align-items: center;
+            height: 3rem;
+            width: 100%;
+            padding-left: 1rem;
+            box-sizing: border-box;
+            text-decoration: none;
+            color: #000000;
+            font-size: 1.5rem;
+            &:hover {
+                background: rgba(#343090, 0.1);
+            }
+            span {
+                font-weight: 700;
+                font-size: 1.25rem;
+                margin-left: 0.5rem;
+            }
+        }
+    }
+}
+
+@keyframes showmenu {
+    0% {
+        transform: translate(-20rem, 0);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes hidemenu {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(-20rem, 0);
+    }
+}
+
+@keyframes darkenbg {
+    0% {
+        background: rgba(0,0,0, 0);
+        z-index: -1;
+    }
+    1% {
+        z-index: 1;
+    }
+    100% {
+        background: rgba(0,0,0, 0.3);
+    }
+}
+
+@keyframes lightenbg {
+    0% {
+        background: rgba(0,0,0, 0.3);
+    }
+    99% {
+        z-index: 1;
+    }
+    100% {
+        background: rgba(0,0,0, 0);
+        z-index: -1;
+    }
+}

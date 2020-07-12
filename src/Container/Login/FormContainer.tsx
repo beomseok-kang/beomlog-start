@@ -7,6 +7,8 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loadDialog } from '../../Modules/dialog';
 import Loader from '../../Components/Shared/Loader';
+import { getUserData } from '../../Modules/user';
+import firebase from 'firebase';
 
 type FormValue = {
     email: string;
@@ -36,6 +38,11 @@ function FormContainer() {
             )
         );
     };
+    const dispatchCurrentUser = (uid: string | undefined) => {
+        dispatch(
+            getUserData(uid)
+        );
+    };
 
     /////// useState ///////////////////
 
@@ -58,6 +65,7 @@ function FormContainer() {
             try {
                 await signIn(values.email, values.password);
                 dispatchSignInSuccessDialog();
+                dispatchCurrentUser(firebase.auth().currentUser?.uid);
                 setIsLoading(false);
                 routerHistory.push({ pathname: '/home' });
             } catch (e) {

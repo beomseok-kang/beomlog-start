@@ -5,6 +5,7 @@ import DialogContainer from './Container/Dialog/DialogContainer';
 import { Route } from 'react-router-dom';
 import HomePage from './Pages/HomePage';
 import RegisterPage from './Pages/RegisterPage';
+import CategoryPage from './Pages/CategoryPage';
 
 
 const firebaseConfig = {
@@ -26,7 +27,8 @@ function App() {
     <>
       <Route path="/auth" component={LoginPage} exact/>
       <Route path="/auth/register" component={RegisterPage} exact/>
-      <Route path="/home" component={HomePage} />
+      <Route path="/home" component={HomePage} exact />
+      <Route path="/category/:category" component={CategoryPage} exact/>
       <DialogContainer />
     </>
   );

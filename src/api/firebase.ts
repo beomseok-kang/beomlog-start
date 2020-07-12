@@ -38,7 +38,7 @@ export const signOut = async () => {
 
 //userData
 
-type UserData = {
+export type UserData = {
     email: string;
     name: string;
     imgUrl: string;
@@ -48,17 +48,12 @@ export const createUserData = async (uid: string | undefined, userData: UserData
     await db.collection('user').doc(uid).set(userData)
 }
 
-// export const getUserData = async (uid: string) => {
-//     await db.collection('user').doc(uid).get()
-// }
-
-export const getUserDataOnSnapshot = (uid: string) => {
-    const doc =  db.collection('user').doc(uid);
-    let snapshot: any = null;
-    let observer = doc.onSnapshot(docSnapshot => {
-        snapshot = docSnapshot;
-    }, err => {
-    console.log(`Encountered error: ${err}`);
+export const getUserDataFromDatabase = async (uid: string) => {
+    let data: object | undefined = {};
+    await db.collection('user').doc(uid).get().then((snapshot) => {
+        data = snapshot.data();
+    }).catch(e => {
+        console.log('some error');
     });
-    return snapshot;
+    return data;
 }

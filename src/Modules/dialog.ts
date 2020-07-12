@@ -19,7 +19,7 @@ export const loadDialog = (dialogType: dialogType, title: string, text: string) 
         title,
         text,
     }
-})
+});
 export const removeDialog = createStandardAction(REMOVE_DIALOG)<number>();
 
 const actions = { loadDialog, removeDialog };
