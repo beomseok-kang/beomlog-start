@@ -1,5 +1,6 @@
 import React from 'react';
 import HeaderContainer from '../Container/Home/HeaderContainer';
+import EditorContainer from '../Container/Writing/EditorContainer';
 
 function CategoryPage({ match }: any) {
 
@@ -11,6 +12,7 @@ function CategoryPage({ match }: any) {
             <div>
                 Hello world {category}!
             </div>
+            <EditorContainer />
         </>
     );
 }
