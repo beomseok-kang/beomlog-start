@@ -127,7 +127,8 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
                             userData: {
                                 email: user.email ? user.email : 'no userdata',
                                 name: user.name ? user.name : 'no userdata',
-                                imgUrl: user.imgUrl ? user.imgUrl : 'no userdata'
+                                imgUrl: user.imgUrl ? user.imgUrl : 'no userdata',
+                                categories: []
                             }
                         }
                     )
@@ -144,17 +145,15 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
     }
 
     return (
-        <>
-            <div className="editor-container">
-                { isLoading
-                ? <Loader />
-                : <>
-                    <input type="name" value={title} onChange={onChangeTitleInput}/>
-                    <Editor data={initialData} onChange={onChangeEditor}/>
-                    <button onClick={onClick}>Submit</button>
-                </>}
-            </div>
-        </>
+        <div className="editor-container">
+            { isLoading
+            ? <Loader />
+            : <>
+                <input type="name" value={title} onChange={onChangeTitleInput}/>
+                <Editor data={initialData} onChange={onChangeEditor}/>
+                <button onClick={onClick}>Submit</button>
+            </>}
+        </div>
     );
 }
 

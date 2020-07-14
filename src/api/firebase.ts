@@ -2,6 +2,8 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 import { db } from '../App';
 import { Post } from '../Modules/post';
+import { category } from '../Container/Home/HeaderContainer';
+import { UserState } from '../Modules/user';
 
 ///////////// authentication /////////////////////////
 
@@ -43,11 +45,12 @@ export type UserData = {
     email: string;
     name: string;
     imgUrl: string;
+    categories: category[];
 }
 
 export const createUserData = async (uid: string | undefined, userData: UserData) => {
-    await db.collection('user').doc(uid).set(userData)
-}
+    await db.collection('user').doc(uid).set(userData);
+};
 
 export const getUserDataFromDatabase = async (uid: string) => {
     let data: object | undefined = {};
@@ -57,7 +60,16 @@ export const getUserDataFromDatabase = async (uid: string) => {
         console.log(e);
     });
     return data;
-}
+};
+
+export const updateUserDataOnDatabase = async (userState: UserState) => {
+    await db.collection('user').doc(userState.uid).set({
+        name: userState.name,
+        email: userState.email,
+        imgUrl: userState.imgUrl,
+        categories: userState.categories
+    });
+};
 
 //post
 

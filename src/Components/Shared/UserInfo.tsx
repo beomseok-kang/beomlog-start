@@ -7,13 +7,15 @@ type UserInfoProps = {
     showUserInfo: boolean;
     onClickSignOutButton: () => void;
     onClickLoginButton: () => void;
+    onClickSettingsButton: () => void;
 };
 
 function UserInfo({
     userData,
     showUserInfo,
     onClickSignOutButton,
-    onClickLoginButton
+    onClickLoginButton,
+    onClickSettingsButton
 }: UserInfoProps) {
 
     return (
@@ -23,7 +25,11 @@ function UserInfo({
             <div className="user-info-button-wrapper">
                 {
                     userData
-                    ? <button onClick={onClickSignOutButton}>Sign Out</button>
+                    ? 
+                    <>
+                        <button onClick={onClickSettingsButton}>Settings</button>
+                        <button onClick={onClickSignOutButton}>Sign Out</button>
+                    </>
                     : <button onClick={onClickLoginButton}>Sign In</button>
                 }
             </div>

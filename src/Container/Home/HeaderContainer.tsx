@@ -62,42 +62,37 @@ function HeaderContainer() {
             console.log(e);
         }
     };
+    const onClickSettingsButton = () => {
+        routerHistory.push({ pathname: '/setting' });
+    }
     const onClickMenuItem = () => {
         setShowToggleMenu(false);
         setShowUserInfo(false);
     }
 
-    ////
-    
-    const categories: category[] = [
-        {
-            category: "redux",
-            numOfPosts: 2
-        },
-        {
-            category: "private",
-            numOfPosts: 5
-        }
-    ];
-    ////
-
     return (
         <header>
-            <ToggleMenu onClick={onClickMenuItem} showToggleMenu={showToggleMenu} categories={categories}/>
+            <ToggleMenu
+                onClick={onClickMenuItem}
+                showToggleMenu={showToggleMenu}
+                categories={user.categories ? user.categories : []}
+            />
             <HamburgerButton onClick={onClickHamburgerButton}/>
             <Logo />
             <UserInfoButton onClick={onClickUserInfoButton}/>
             <UserInfo
                 userData={
-                    user.email && user.name && user.imgUrl ? 
+                    user.email && user.name && user.imgUrl && user.categories ? 
                     {
                         email: user.email,
                         name: user.name,
-                        imgUrl: user.imgUrl
+                        imgUrl: user.imgUrl,
+                        categories: user.categories
                     } :
                     undefined
                 }
                 showUserInfo = {showUserInfo}
+                onClickSettingsButton={onClickSettingsButton}
                 onClickSignOutButton={onClickSignout}
                 onClickLoginButton={onClickLoginButton}
             />

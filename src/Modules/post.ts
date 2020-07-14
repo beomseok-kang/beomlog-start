@@ -66,7 +66,8 @@ const initialState: PostState = {
     userData: {
         email: '',
         name: '',
-        imgUrl: ''
+        imgUrl: '',
+        categories: []
     },
     error: undefined
 }
