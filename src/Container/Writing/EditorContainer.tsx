@@ -21,22 +21,24 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
 
     ////////// state //////////////////
 
-    const initialCategory = isUpdating ? post.category : '';
+    let initialCategoryLogic = '';
+    if (isUpdating) {
+        initialCategoryLogic = post ? post.category : ''
+    } else if (user.categories) {
+        initialCategoryLogic = user.categories['No Category'].category
+    } else {
+        initialCategoryLogic = '';
+    }
+
+    const initialCategoryValue = initialCategoryLogic;
     const initialData = isUpdating ? post.editorData : '';
     const initialTitle = isUpdating ? post.title : '';
 
-    const [category, setCategory] = useState<string>(initialCategory);
+    const [categoryValue, setCategoryValue] = useState<string>(initialCategoryValue);
     const [data, setData] = useState<string>(initialData);
     const [title, setTitle] = useState<string>(initialTitle);
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
-
-    const onChangeEditor = (event: any, editor: any) => {
-        setData(editor.getData());
-    }
-    const onChangeTitleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setTitle(event.target.value);
-    }
 
     ////////// dialog ///////////////////////
 
@@ -77,7 +79,7 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
         );
     };
 
-    ////////// click & submit ///////////////
+    ////////// click & submit & onChange ///////////////
 
     const onClick = () => {
         const time = new Date();
@@ -92,7 +94,7 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
                             postId: post.postId,
                             title,
                             editorData: data,
-                            category,
+                            category: categoryValue,
                             uid: post.uid,
                             time,
                             userData: {
@@ -121,14 +123,14 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
                             postId,
                             title,
                             editorData: data,
-                            category,
+                            category: categoryValue,
                             uid: user.uid ? user.uid : 'no userdata',
                             time,
                             userData: {
                                 email: user.email ? user.email : 'no userdata',
                                 name: user.name ? user.name : 'no userdata',
                                 imgUrl: user.imgUrl ? user.imgUrl : 'no userdata',
-                                categories: []
+                                categories: user.categories ? user.categories : {}
                             }
                         }
                     )
@@ -142,19 +144,47 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
                 setIsLoading(false);
             }
         }
-    }
+    };
+    
+    const onChangeEditor = (event: any, editor: any) => {
+        setData(editor.getData());
+    };
+    const onChangeTitleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setTitle(event.target.value);
+    };
+    const onChangeSelectCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setCategoryValue(event.target.value);
+    };
+
+    /////// some useful consts //////////////
+    const categoriesToArray = user.categories ? Object.values(user.categories) : [];
 
     return (
         <div className="editor-container">
             { isLoading
             ? <Loader />
             : <>
+                <select value={categoryValue} onChange={onChangeSelectCategory}>
+                    {
+                        user.categories
+                        ? categoriesToArray.map(category => (
+                            <option value={category.category}>
+                                {category.category}
+                            </option>
+                        ))
+                        : null
+                    }
+                </select>
                 <input type="name" value={title} onChange={onChangeTitleInput}/>
                 <Editor data={initialData} onChange={onChangeEditor}/>
                 <button onClick={onClick}>Submit</button>
             </>}
         </div>
     );
+}
+
+EditorContainer.defaultProps = {
+    isUpdating: false
 }
 
 export default EditorContainer;

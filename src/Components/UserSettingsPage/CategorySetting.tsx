@@ -3,7 +3,9 @@ import { category } from '../../Container/Home/HeaderContainer';
 import Button from '../Shared/Button';
 
 type CategorySettingProps = {
-    categories: category[];
+    categories: {
+        [category: string]: category;
+    };
     onClickXButton: () => void;
     onClickAddButton: () => void;
     inputValue: string;
@@ -19,11 +21,13 @@ function CategorySetting({
     onInputChange,
     showAddItem
 }: CategorySettingProps) {
+    const categoriesToArray = Object.values(categories);
+
     return (
         <div className="category-setting-wrapper">
             <ul>
                 {
-                    categories.map(category => (
+                    categoriesToArray.map(category => (
                         <li>
                             <span>{category.category}</span>
                             <strong>({category.numOfPosts})</strong>

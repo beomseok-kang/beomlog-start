@@ -1,4 +1,4 @@
-import { UserData, getUserDataFromDatabase, updateUserDataOnDatabase } from "../api/firebase";
+import { getUserDataFromDatabase, updateUserDataOnDatabase } from "../api/firebase";
 import { createUserSaga } from "../lib/asyncUtils";
 import { takeEvery } from "redux-saga/effects";
 import { category } from "../Container/Home/HeaderContainer";
@@ -34,7 +34,9 @@ export type UserState = {
     name?: string;
     email?: string;
     imgUrl?: string;
-    categories?: category[];
+    categories?: {
+        [category: string]: category
+    }
 }
 const initialState = {}
 

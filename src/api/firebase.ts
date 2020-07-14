@@ -68,7 +68,7 @@ export const updateUserDataOnDatabase = async (userState: UserState) => {
         email: userState.email,
         imgUrl: userState.imgUrl,
         categories: userState.categories
-    });
+    }); 
 };
 
 //post
@@ -81,7 +81,47 @@ export const getPostDataFromDatabase = async (postId: string) => {
     return data;
 };
 export const uploadPostDataToDatabase = async (post: Post) => {
-    await db.collection('post').doc(post.postId).set(post);
+    const {
+        category,
+        editorData,
+        postId,
+        time,
+        title,
+        userData,
+        uid
+    } = post;
+    await db.collection('post').doc(postId).set(post);
+    const postDataToPostsByUser = {
+        [postId]: {
+            category,
+            editorData,
+            postId,
+            time,
+            title,
+            userData
+        }
+    };
+    await db.collection('postsByUser').doc(uid).set({
+        All: {
+            ...postDataToPostsByUser
+        },
+        [category]: {
+            ...postDataToPostsByUser
+        }
+    }, {merge: true});
+    await db.collection('user').doc(uid).update({
+        categories: {
+            ...userData.categories,
+            All: {
+                category: 'All',
+                numOfPosts: (userData.categories['All'].numOfPosts + 1)
+            },
+            [category]: {
+                category: category,
+                numOfPosts: (userData.categories[category].numOfPosts + 1)
+            }
+        }
+    })
 };
 export const deletePostDataFromDatabase = async (postId: string) => {
     await db.collection('post').doc(postId).delete();

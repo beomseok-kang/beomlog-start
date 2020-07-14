@@ -1,6 +1,7 @@
 import { UserData, getPostDataFromDatabase, uploadPostDataToDatabase, deletePostDataFromDatabase, updatePostDataOnDatabase } from "../api/firebase";
 import { createPostSaga } from "../lib/asyncUtils";
 import { takeEvery } from "redux-saga/effects";
+import { category } from "../Container/Home/HeaderContainer";
 
 const UPLOAD_POST = 'post/UPLOAD_POST';
 const UPLOAD_POST_SUCCESS = 'post/UPLOAD_POST_SUCCESS';
@@ -50,7 +51,14 @@ export type Post = {
     category: string;
     uid: string; //writer uid
     time: any;
-    userData: UserData;
+    userData: {
+        email: string,
+        name: string,
+        imgUrl: string,
+        categories: {
+            [category: string]: category
+        }
+    };
 };
 
 export type PostState = Post & {
@@ -67,7 +75,7 @@ const initialState: PostState = {
         email: '',
         name: '',
         imgUrl: '',
-        categories: []
+        categories: {}
     },
     error: undefined
 }

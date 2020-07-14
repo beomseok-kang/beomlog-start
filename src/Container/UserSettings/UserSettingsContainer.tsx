@@ -14,11 +14,12 @@ function UserSettingsContainer() {
     const user = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch();
     const routerHistory = useHistory();
+    
 
     const [isLoading, setisLoading] = useState(false);
     const [nickname, setNickname] = useState(user.name ? user.name : 'no nickname');
     const [showAddItem, setShowAddItem] = useState(false);
-    const [categoriesTemp, setCategoriesTemp] = useState(user.categories ? user.categories : []);
+    const [categoriesTemp, setCategoriesTemp] = useState(user.categories ? user.categories : {});
     const [categoryInputValue, setCategoryInputValue] = useState('');
 
 
@@ -52,10 +53,13 @@ function UserSettingsContainer() {
             setShowAddItem(true);
         } else if (categoryInputValue !== "") {
             setCategoriesTemp(
-                categoriesTemp.concat({
-                    category: categoryInputValue,
-                    numOfPosts: 0
-                })
+                Object.assign({}, {
+                    [categoryInputValue]: {
+                        category: categoryInputValue,
+                        numOfPosts: 0
+                    }
+                }, categoriesTemp
+                )
             );
             setCategoryInputValue('');
         } else {

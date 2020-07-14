@@ -70,12 +70,15 @@ function HeaderContainer() {
         setShowUserInfo(false);
     }
 
+    /////// some useful consts //////////////
+    const categoriesToArray = user.categories ? Object.values(user.categories) : [];
+
     return (
         <header>
             <ToggleMenu
                 onClick={onClickMenuItem}
                 showToggleMenu={showToggleMenu}
-                categories={user.categories ? user.categories : []}
+                categories={categoriesToArray}
             />
             <HamburgerButton onClick={onClickHamburgerButton}/>
             <Logo />
@@ -87,7 +90,7 @@ function HeaderContainer() {
                         email: user.email,
                         name: user.name,
                         imgUrl: user.imgUrl,
-                        categories: user.categories
+                        categories: categoriesToArray
                     } :
                     undefined
                 }
