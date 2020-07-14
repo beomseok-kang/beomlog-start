@@ -8,6 +8,7 @@ import RegisterPage from './Pages/RegisterPage';
 import CategoryPage from './Pages/CategoryPage';
 import PostPage from './Pages/PostPage';
 import WritingPage from './Pages/WritingPage';
+import UpdatePage from './Pages/UpdatePage';
 
 
 const firebaseConfig = {
@@ -33,6 +34,7 @@ function App() {
       <Route path="/category/:category" component={CategoryPage} exact/>
       <Route path="/post/:postId" component={PostPage} exact/>
       <Route path="/upload" component={WritingPage} exact/>
+      <Route path="/update/:postId" component={UpdatePage} exact/>
       <DialogContainer />
     </>
   );

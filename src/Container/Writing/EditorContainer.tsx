@@ -3,22 +3,27 @@ import Editor from '../../Components/WritingPage/Editor';
 import './EditorContainer.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Modules';
-import { uploadPost } from '../../Modules/post';
+import { uploadPost, updatePost } from '../../Modules/post';
 import Loader from '../../Components/Shared/Loader';
 import { loadDialog } from '../../Modules/dialog';
 import { useHistory } from 'react-router-dom';
 
-function EditorContainer() {
+type EditorContainerProps = {
+    isUpdating: boolean;
+}
+
+function EditorContainer({ isUpdating }: EditorContainerProps) {
 
     const user = useSelector((state: RootState) => state.user);
+    const post = useSelector((state: RootState) => state.post);
     const dispatch = useDispatch();
     const routerHistory = useHistory();
 
     ////////// state //////////////////
 
-    const initialCategory = '';
-    const initialData = '';
-    const initialTitle = '';
+    const initialCategory = isUpdating ? post.category : '';
+    const initialData = isUpdating ? post.editorData : '';
+    const initialTitle = isUpdating ? post.title : '';
 
     const [category, setCategory] = useState<string>(initialCategory);
     const [data, setData] = useState<string>(initialData);
@@ -53,14 +58,58 @@ function EditorContainer() {
             )
         );
     };
+    const dispatchUpdateSuccessDialog = () => {
+        dispatch(
+            loadDialog(
+                'success',
+                'Update Complete',
+                'The post is updated successfully.'
+            )
+        );
+    };
+    const dispatchUpdateWarningDialog = () => {
+        dispatch(
+            loadDialog(
+                'warning',
+                'Update Failed',
+                'An error has occured. Please try again.'
+            )
+        );
+    };
 
     ////////// click & submit ///////////////
 
     const onClick = () => {
-        if (!user) {
+        const time = new Date();
+        if (!user.uid) {
             alert('You have to sign in to upload any post.');
+        } else if (isUpdating) {
+            setIsLoading(true);
+            try {
+                dispatch(
+                    updatePost(
+                        {
+                            postId: post.postId,
+                            title,
+                            editorData: data,
+                            category,
+                            uid: post.uid,
+                            time,
+                            userData: {
+                                ...post.userData
+                            }
+                        }
+                    )
+                );
+                dispatchUpdateSuccessDialog();
+                setIsLoading(false);
+                routerHistory.push({ pathname: `/post/${post.postId}` });
+            } catch (e) {
+                console.log(e);
+                dispatchUpdateWarningDialog();
+                setIsLoading(false);
+            }
         } else {
-            const time = new Date();
             const postId = `${time.toISOString()}_${user.uid}`;
 
             setIsLoading(true);
@@ -101,7 +150,7 @@ function EditorContainer() {
                 ? <Loader />
                 : <>
                     <input type="name" value={title} onChange={onChangeTitleInput}/>
-                    <Editor onChange={onChangeEditor}/>
+                    <Editor data={initialData} onChange={onChangeEditor}/>
                     <button onClick={onClick}>Submit</button>
                 </>}
             </div>

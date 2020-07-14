@@ -1,6 +1,16 @@
 # Beomlog
 
 
+### Ver 0.0.6
+Post UD Finished.
+Update Page added.
+EditorContainer and Editor updated with some props added.
+UPDATE_POST and DELETE_POST logics on reducer done.
+
+Needs to be done next:
+1. Category and Getting posts (board)
+2. Profile img upload
+
 ### Ver 0.0.5
 Post Redux, redux-saga, and logics added.
 Writing Page added.
@@ -8,7 +18,7 @@ Post Page added.
 firebase post uploading logics added.
 
 Needs to be done next:
-1. Post RUD (C is done)
+1. Post UD (CR is done)
 2. building updating page
 3. profile img upload
 

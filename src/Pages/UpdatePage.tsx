@@ -2,13 +2,21 @@ import React from 'react';
 import HeaderContainer from '../Container/Home/HeaderContainer';
 import EditorContainer from '../Container/Writing/EditorContainer';
 
-function WritingPage() {
+type UpdatePageProps = {
+    match: any;
+}
+
+function UpdatePage({ match }: UpdatePageProps) {
+
+    const { postId } = match.params;
+
     return (
         <>
             <HeaderContainer />
-            <EditorContainer isUpdating={false}/>
+            <div>{postId}</div>
+            <EditorContainer isUpdating/>
         </>
     );
 }
 
-export default WritingPage;
+export default UpdatePage;

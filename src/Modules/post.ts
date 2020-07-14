@@ -1,7 +1,6 @@
-import { ActionType } from "typesafe-actions";
 import { UserData, getPostDataFromDatabase, uploadPostDataToDatabase, deletePostDataFromDatabase, updatePostDataOnDatabase } from "../api/firebase";
 import { createPostSaga } from "../lib/asyncUtils";
-import { takeEvery, takeLeading } from "redux-saga/effects";
+import { takeEvery } from "redux-saga/effects";
 
 const UPLOAD_POST = 'post/UPLOAD_POST';
 const UPLOAD_POST_SUCCESS = 'post/UPLOAD_POST_SUCCESS';
@@ -41,8 +40,6 @@ export const updatePost = (
     payload: post,
     meta: post.postId
 });
-
-const actions = { uploadPost, getPost, deletePost, updatePost };
 
 ///////////////////// state /////////////////////////
 
@@ -90,7 +87,7 @@ export function* postSaga() {
 
 /////////////// reducer /////////////////////////////////
 
-export default function post(state: PostState = initialState, action: any) {
+export default function post(state: PostState = initialState, action: any): PostState {
     switch(action.type) {
         case GET_POST:
             return {
@@ -118,6 +115,36 @@ export default function post(state: PostState = initialState, action: any) {
                 error: null
             };
         case UPLOAD_POST_ERROR:
+            return {
+                ...initialState,
+                error: action.payload
+            };
+        case DELETE_POST:
+            return {
+                ...initialState,
+                error: undefined
+            };
+        case DELETE_POST_SUCCESS:
+            return {
+                ...state,
+                error: null
+            };
+        case DELETE_POST_ERROR:
+            return {
+                ...state,
+                error: action.payload
+            };
+        case UPDATE_POST:
+            return {
+                ...action.payload,
+                error: undefined
+            };
+        case UPDATE_POST_SUCCESS:
+            return {
+                ...state,
+                error: null
+            };
+        case UPDATE_POST_ERROR:
             return {
                 ...initialState,
                 error: action.payload
