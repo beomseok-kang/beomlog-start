@@ -2,18 +2,13 @@ import React from 'react';
 import HeaderContainer from '../Container/Home/HeaderContainer';
 import EditorContainer from '../Container/Writing/EditorContainer';
 
-function CategoryPage({ match }: any) {
-
-    const { category } = match.params;
-
+function WritingPage() {
     return (
         <>
             <HeaderContainer />
-            <div>
-                Hello world {category}!
-            </div>
+            <EditorContainer />
         </>
     );
 }
 
-export default CategoryPage;
+export default WritingPage;

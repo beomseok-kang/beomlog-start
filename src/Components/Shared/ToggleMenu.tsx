@@ -34,6 +34,11 @@ function ToggleMenu({ showToggleMenu, onClick, categories }: ToggleMenuProps) {
                         </li>
                     ))
                 }
+                <li>
+                    <Link to="/upload" onClick={onClick}>
+                        Upload
+                    </Link>
+                </li>
             </ul>
         </div>
     );

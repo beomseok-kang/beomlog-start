@@ -1,5 +1,17 @@
 # Beomlog
 
+
+### Ver 0.0.5
+Post Redux, redux-saga, and logics added.
+Writing Page added.
+Post Page added.
+firebase post uploading logics added.
+
+Needs to be done next:
+1. Post RUD (C is done)
+2. building updating page
+3. profile img upload
+
 ### Ver 0.0.4
 Header for CategoryPage, HomePage done.
 Connecting to the Firebase and getting the UserData (Redux Saga Middleware) done.

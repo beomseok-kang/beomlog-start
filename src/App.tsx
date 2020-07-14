@@ -6,6 +6,8 @@ import { Route } from 'react-router-dom';
 import HomePage from './Pages/HomePage';
 import RegisterPage from './Pages/RegisterPage';
 import CategoryPage from './Pages/CategoryPage';
+import PostPage from './Pages/PostPage';
+import WritingPage from './Pages/WritingPage';
 
 
 const firebaseConfig = {
@@ -29,6 +31,8 @@ function App() {
       <Route path="/auth/register" component={RegisterPage} exact/>
       <Route path="/home" component={HomePage} exact />
       <Route path="/category/:category" component={CategoryPage} exact/>
+      <Route path="/post/:postId" component={PostPage} exact/>
+      <Route path="/upload" component={WritingPage} exact/>
       <DialogContainer />
     </>
   );

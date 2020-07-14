@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 import 'firebase/firestore';
 import { db } from '../App';
+import { Post } from '../Modules/post';
 
 ///////////// authentication /////////////////////////
 
@@ -53,7 +54,26 @@ export const getUserDataFromDatabase = async (uid: string) => {
     await db.collection('user').doc(uid).get().then((snapshot) => {
         data = snapshot.data();
     }).catch(e => {
-        console.log('some error');
+        console.log(e);
     });
     return data;
 }
+
+//post
+
+export const getPostDataFromDatabase = async (postId: string) => {
+    let data: object | undefined = {};
+    await db.collection('post').doc(postId).get().then((snapshot) => {
+        data = snapshot.data();
+    });
+    return data;
+};
+export const uploadPostDataToDatabase = async (post: Post) => {
+    await db.collection('post').doc(post.postId).set(post);
+};
+export const deletePostDataFromDatabase = async (postId: string) => {
+    await db.collection('post').doc(postId).delete();
+};
+export const updatePostDataOnDatabase = async (post:Post) => {
+    await db.collection('post').doc(post.postId).set(post);
+};

@@ -21,6 +21,9 @@ function HeaderContainer() {
 
     const user = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch();
+
+    //// state ////////////////////////
+
     const [showUserInfo, setShowUserInfo] = useState<boolean>(false);
     const [showToggleMenu, setShowToggleMenu] = useState<boolean>(false);
     const routerHistory = useHistory();
