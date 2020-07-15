@@ -2,11 +2,25 @@
 
 You can check the tech log [here](https://lgphone.tistory.com/category/Else/Personal%20Blog%20Building)
 
+## Project stack
+
+- React with Typescript
+- Redux
+- Redux-saga
+- Firebase/Firestore
+- React-router
+- SCSS
+- CKEditor5
+
+
+
 ### Ver 0.0.7
 
 getCategoryPosts done.
 
 Post CRUD all finished with better data structure in firebase.
+
+loading state added.
 
 Needs to be done next:
 1. Profile img upload
