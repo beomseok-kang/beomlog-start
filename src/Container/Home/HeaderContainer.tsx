@@ -78,6 +78,13 @@ function HeaderContainer() {
         setShowToggleMenu(false);
         setShowUserInfo(false);
     }
+    const onClickUpload = () => {
+        if (user.uid) {
+            routerHistory.push({ pathname: '/upload' });
+        } else {
+            alert('Please sign in to upload new post.');
+        }
+    }
 
     /////// some useful consts //////////////
     const categoriesToArray = user.categories ? Object.values(user.categories) : [];
@@ -85,9 +92,10 @@ function HeaderContainer() {
     return (
         <header>
             <ToggleMenu
-                onClick={onClickMenuItem}
+                onClickMenuItem={onClickMenuItem}
                 showToggleMenu={showToggleMenu}
                 categories={categoriesToArray}
+                onClickUpload={onClickUpload}
             />
             <HamburgerButton onClick={onClickHamburgerButton}/>
             <Logo />

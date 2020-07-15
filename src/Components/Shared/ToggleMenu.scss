@@ -37,16 +37,21 @@
             animation-duration: 0.4s;
             animation-fill-mode: forwards;
         }
-        a {
+        li {
             display: flex;
-            align-items: center;
             height: 3rem;
-            width: 100%;
-            padding-left: 1rem;
+            align-items: center;
             box-sizing: border-box;
-            text-decoration: none;
             color: #000000;
+            cursor: pointer;
             font-size: 1.5rem;
+            padding-left: 1rem;
+            a {
+                height: 100%;
+                width: 100%;
+                text-decoration: none;
+                color: #000000;
+            }
             &:hover {
                 background: rgba(#343090, 0.1);
             }

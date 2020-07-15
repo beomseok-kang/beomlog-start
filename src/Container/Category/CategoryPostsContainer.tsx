@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { CategoryPostsState, getCategoryPosts } from '../../Modules/categoryPosts';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Modules';

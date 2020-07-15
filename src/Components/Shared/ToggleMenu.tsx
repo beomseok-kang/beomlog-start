@@ -5,11 +5,12 @@ import { category } from '../../Container/Home/HeaderContainer';
 
 type ToggleMenuProps = {
     showToggleMenu: boolean;
-    onClick: () => void;
+    onClickMenuItem: () => void;
+    onClickUpload: () => void;
     categories: category[];
 }
 
-function ToggleMenu({ showToggleMenu, onClick, categories }: ToggleMenuProps) {
+function ToggleMenu({ showToggleMenu, onClickMenuItem, onClickUpload, categories }: ToggleMenuProps) {
 
     const divClassName = "toggle-menu-wrapper" + (showToggleMenu ? ' on': ' off');
     const ulClassName = "category-list" + (showToggleMenu ? ' on': ' off');
@@ -18,14 +19,14 @@ function ToggleMenu({ showToggleMenu, onClick, categories }: ToggleMenuProps) {
         <div className={divClassName}>
             <ul className={ulClassName}>
                 <li key="home">
-                    <Link to="/home" onClick={onClick}>
+                    <Link to="/home" onClick={onClickMenuItem}>
                         Home
                     </Link>
                 </li>
                 {
                     categories.map(category => (
                         <li key={category.category}>
-                            <Link to={`/category/${category.category}`} onClick={onClick}>
+                            <Link to={`/category/${category.category}`} onClick={onClickMenuItem}>
                                 {category.category}
                                 <span>
                                     ({category.numOfPosts.toString()})
@@ -34,10 +35,8 @@ function ToggleMenu({ showToggleMenu, onClick, categories }: ToggleMenuProps) {
                         </li>
                     ))
                 }
-                <li key="upload">
-                    <Link to="/upload" onClick={onClick}>
-                        Upload
-                    </Link>
+                <li key="upload" onClick={onClickUpload}>
+                    Upload New
                 </li>
             </ul>
         </div>

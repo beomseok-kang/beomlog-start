@@ -71,3 +71,14 @@ export const createCategoryPostsSaga = (type: string, promiseCreator: any) => {
         }
     }
 };
+
+// export const createHomePostsSaga = (type: string, promiseCreator: any) => {
+//     const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
+
+//     return function* saga(action: any) {
+//         try {
+//             yield put(setLoading());
+//             const result = yield call()
+//         }
+//     }
+// }

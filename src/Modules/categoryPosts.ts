@@ -1,12 +1,16 @@
 import { category } from "../Container/Home/HeaderContainer";
 import { createCategoryPostsSaga } from "../lib/asyncUtils";
 import { takeEvery } from "redux-saga/effects";
-import { getCategoryPostsFromDatabase } from "../api/firebase";
+import { getCategoryPostsFromDatabase, getHomePostsFromDatabase } from "../api/firebase";
 
 
 const GET_POSTS = 'categoryPosts/GET_POSTS';
 const GET_POSTS_SUCCESS = 'categoryPosts/GET_POSTS_SUCCESS';
 const GET_POSTS_ERROR = 'categoryPosts/GET_POSTS_ERROR';
+
+const GET_HOME_POSTS = 'categoryPosts/GET_HOME_POSTS';
+const GET_HOME_POSTS_SUCCESS = 'categoryPosts/GET_HOME_POSTS_SUCCESS';
+const GET_HOME_POSTS_ERROR = 'categoryPosts/GET_HOME_POSTS_ERROR';
 
 const DELETE_POSTS = 'categoryPosts/DELETE_POSTS';
 
@@ -17,6 +21,9 @@ export type getCategoryPostsParams = {
 export const getCategoryPosts = (params: getCategoryPostsParams) => ({
     type: GET_POSTS,
     payload: params
+});
+export const getHomePosts = () => ({
+    type: GET_HOME_POSTS
 });
 export const deleteCategoryPosts = () => ({
     type: DELETE_POSTS
@@ -44,9 +51,11 @@ const initialState: CategoryPostsState = [];
 //////////// saga ////////////////////////////
 
 const getCategoryPostsSaga = createCategoryPostsSaga(GET_POSTS, getCategoryPostsFromDatabase);
+const getHomePostsSaga = createCategoryPostsSaga(GET_HOME_POSTS, getHomePostsFromDatabase);
 
 export function* categoryPostsSaga() {
     yield takeEvery(GET_POSTS, getCategoryPostsSaga);
+    yield takeEvery(GET_HOME_POSTS, getHomePostsSaga);
 }
 
 ////////// reducer ////////////////////////////
@@ -59,6 +68,12 @@ export default function categoryPosts(state: CategoryPostsState = initialState, 
         case GET_POSTS_SUCCESS:
             return action.payload;
         case GET_POSTS_ERROR:
+            return initialState;
+        case GET_HOME_POSTS:
+            return initialState;
+        case GET_HOME_POSTS_SUCCESS:
+            return action.payload;
+        case GET_HOME_POSTS_ERROR:
             return initialState;
         case DELETE_POSTS:
             return initialState;

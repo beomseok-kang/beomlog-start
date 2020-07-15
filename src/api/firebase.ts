@@ -128,15 +128,22 @@ export const updatePostDataOnDatabase = async (post:Post) => {
     await db.collection('postsByUser').doc(uid).collection(category).doc(postId).set(post);
 };
 
-//categoryPosts
+//categoryPosts & homePosts
 
 export const getCategoryPostsFromDatabase = async (params: getCategoryPostsParams) => {
     const {
         uid,
         category
     } = params;
-    let data: object | undefined = {}
+    let data: object | undefined = {};
     await db.collection('postsByUser').doc(uid).collection(category).get().then((snapshot) => {
+        data = snapshot.docs.map(doc => doc.data());
+    });
+    return data;
+};
+export const getHomePostsFromDatabase = async () => {
+    let data: object | undefined = {};
+    await db.collection('post').orderBy('time', 'desc').limit(10).get().then((snapshot) => {
         data = snapshot.docs.map(doc => doc.data());
     });
     return data;
