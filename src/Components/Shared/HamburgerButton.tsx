@@ -2,13 +2,14 @@ import React from 'react';
 import './HamburgerButton.scss';
 
 type HamburgerButtonProps = {
+    showToggleMenu: boolean | undefined;
     onClick: () => void;
 }
 
-function HamburgerButton ({ onClick }: HamburgerButtonProps) {
+function HamburgerButton ({ showToggleMenu, onClick }: HamburgerButtonProps) {
     return (
         <div id="menuToggle" onClick={onClick}>
-            <input type="checkbox" />
+            <input type="checkbox" checked={showToggleMenu}/>
             <span></span>
             <span></span>
             <span></span>

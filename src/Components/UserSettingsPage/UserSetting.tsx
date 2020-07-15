@@ -1,5 +1,6 @@
 import React from 'react';
 import { UserState } from '../../Modules/user';
+import './UserSetting.scss';
 
 type UserSettingProps = {
     userState: UserState;
@@ -12,7 +13,7 @@ function UserSetting({ userState, nicknameValue, onChange }: UserSettingProps) {
         <div className="user-setting-wrapper">
             <div>{userState.email}</div>
             <input type="name" value={nicknameValue} onChange={onChange}/>
-            <div>{userState.imgUrl}</div>
+            <img src={userState.imgUrl} alt="profile"/>
         </div>
     );
 }

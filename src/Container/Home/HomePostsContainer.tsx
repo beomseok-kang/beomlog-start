@@ -4,6 +4,7 @@ import CategoryPostsList from '../../Components/CategoryPage/CategoryPostsList';
 import { CategoryPostsState, getHomePosts } from '../../Modules/categoryPosts';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Modules';
+import './HomePostsContainer.scss';
 
 
 function HomePostsContainer() {
@@ -23,7 +24,7 @@ function HomePostsContainer() {
     }, [dispatch]);
 
     return (
-        <div className="home-posts-container inner">
+        <div className="home-posts-container">
             {
                 loading
                 ? <Loader />

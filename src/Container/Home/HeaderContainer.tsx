@@ -25,7 +25,7 @@ function HeaderContainer() {
     //// state ////////////////////////
 
     const [showUserInfo, setShowUserInfo] = useState<boolean>(false);
-    const [showToggleMenu, setShowToggleMenu] = useState<boolean>(false);
+    const [showToggleMenu, setShowToggleMenu] = useState<boolean | undefined>(undefined);
     const routerHistory = useHistory();
 
     const dispatchRemoveUserData = () => {
@@ -82,7 +82,7 @@ function HeaderContainer() {
         if (user.uid) {
             routerHistory.push({ pathname: '/upload' });
         } else {
-            alert('Please sign in to upload new post.');
+            alert('Please sign in to write any post.');
         }
     }
 
@@ -97,7 +97,7 @@ function HeaderContainer() {
                 categories={categoriesToArray}
                 onClickUpload={onClickUpload}
             />
-            <HamburgerButton onClick={onClickHamburgerButton}/>
+            <HamburgerButton showToggleMenu={showToggleMenu} onClick={onClickHamburgerButton}/>
             <Logo />
             <UserInfoButton onClick={onClickUserInfoButton}/>
             <UserInfo

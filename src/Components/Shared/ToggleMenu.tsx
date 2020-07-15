@@ -4,7 +4,7 @@ import './ToggleMenu.scss';
 import { category } from '../../Container/Home/HeaderContainer';
 
 type ToggleMenuProps = {
-    showToggleMenu: boolean;
+    showToggleMenu: boolean | undefined;
     onClickMenuItem: () => void;
     onClickUpload: () => void;
     categories: category[];
@@ -12,8 +12,9 @@ type ToggleMenuProps = {
 
 function ToggleMenu({ showToggleMenu, onClickMenuItem, onClickUpload, categories }: ToggleMenuProps) {
 
-    const divClassName = "toggle-menu-wrapper" + (showToggleMenu ? ' on': ' off');
-    const ulClassName = "category-list" + (showToggleMenu ? ' on': ' off');
+    const onOff = showToggleMenu === undefined ? '' : showToggleMenu === true ? ' on' : ' off';
+    const divClassName = "toggle-menu-wrapper" + onOff;
+    const ulClassName = "category-list" + onOff;
 
     return (
         <div className={divClassName}>

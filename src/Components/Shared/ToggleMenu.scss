@@ -4,6 +4,7 @@
     width: 100vw;
     height: 100vh;
     background: rgba(0,0,0,0);
+    z-index: -1;
     &.on {
         animation-name: darkenbg;
         animation-duration: 0.4s;
@@ -92,12 +93,14 @@
     }
     100% {
         background: rgba(0,0,0, 0.3);
+        z-index: 1;
     }
 }
 
 @keyframes lightenbg {
     0% {
         background: rgba(0,0,0, 0.3);
+        z-index: 1;
     }
     99% {
         z-index: 1;
