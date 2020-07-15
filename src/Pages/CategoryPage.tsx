@@ -1,6 +1,6 @@
 import React from 'react';
 import HeaderContainer from '../Container/Home/HeaderContainer';
-import EditorContainer from '../Container/Writing/EditorContainer';
+import CategoryPostsContainer from '../Container/Category/CategoryPostsContainer';
 
 function CategoryPage({ match }: any) {
 
@@ -9,9 +9,7 @@ function CategoryPage({ match }: any) {
     return (
         <>
             <HeaderContainer />
-            <div>
-                Hello world {category}!
-            </div>
+            <CategoryPostsContainer category={category} />
         </>
     );
 }

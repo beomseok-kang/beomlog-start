@@ -17,14 +17,14 @@ function ToggleMenu({ showToggleMenu, onClick, categories }: ToggleMenuProps) {
     return (
         <div className={divClassName}>
             <ul className={ulClassName}>
-                <li>
+                <li key="home">
                     <Link to="/home" onClick={onClick}>
                         Home
                     </Link>
                 </li>
                 {
                     categories.map(category => (
-                        <li>
+                        <li key={category.category}>
                             <Link to={`/category/${category.category}`} onClick={onClick}>
                                 {category.category}
                                 <span>
@@ -34,7 +34,7 @@ function ToggleMenu({ showToggleMenu, onClick, categories }: ToggleMenuProps) {
                         </li>
                     ))
                 }
-                <li>
+                <li key="upload">
                     <Link to="/upload" onClick={onClick}>
                         Upload
                     </Link>

@@ -1,6 +1,11 @@
 import React from 'react';
 import './UserInfo.scss';
-import { UserData } from '../../api/firebase';
+
+type UserData = {
+    email: string;
+    name: string;
+    imgUrl: string;
+}
 
 type UserInfoProps = {
     userData?: UserData;
@@ -17,7 +22,7 @@ function UserInfo({
     onClickLoginButton,
     onClickSettingsButton
 }: UserInfoProps) {
-
+    
     return (
         <div className={"user-info-wrapper " + (showUserInfo? "on" : "off")}>
             <h3>{userData ? userData.name : null}</h3>

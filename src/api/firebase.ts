@@ -2,8 +2,13 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 import { db } from '../App';
 import { Post } from '../Modules/post';
-import { category } from '../Container/Home/HeaderContainer';
 import { UserState } from '../Modules/user';
+import { getCategoryPostsParams } from '../Modules/categoryPosts';
+
+type category = {
+    category: string;
+    numOfPosts: number;
+};
 
 ///////////// authentication /////////////////////////
 
@@ -26,7 +31,6 @@ export const signIn = async (email: string, password: string) => {
         .catch(function(error) {
             throw new Error(error);
         });
-    console.log(firebase.auth().currentUser);
     return firebase.auth().currentUser;
 };
 
@@ -45,7 +49,9 @@ export type UserData = {
     email: string;
     name: string;
     imgUrl: string;
-    categories: category[];
+    categories: {
+        [category: string]: category
+    }
 }
 
 export const createUserData = async (uid: string | undefined, userData: UserData) => {
@@ -53,7 +59,7 @@ export const createUserData = async (uid: string | undefined, userData: UserData
 };
 
 export const getUserDataFromDatabase = async (uid: string) => {
-    let data: object | undefined = {};
+    let data: object | undefined = undefined;
     await db.collection('user').doc(uid).get().then((snapshot) => {
         data = snapshot.data();
     }).catch(e => {
@@ -81,51 +87,57 @@ export const getPostDataFromDatabase = async (postId: string) => {
     return data;
 };
 export const uploadPostDataToDatabase = async (post: Post) => {
+    const increment = firebase.firestore.FieldValue.increment(1);
     const {
         category,
-        editorData,
         postId,
-        time,
-        title,
-        userData,
         uid
     } = post;
     await db.collection('post').doc(postId).set(post);
-    const postDataToPostsByUser = {
-        [postId]: {
-            category,
-            editorData,
-            postId,
-            time,
-            title,
-            userData
-        }
-    };
-    await db.collection('postsByUser').doc(uid).set({
-        All: {
-            ...postDataToPostsByUser
-        },
-        [category]: {
-            ...postDataToPostsByUser
-        }
-    }, {merge: true});
+    await db.collection('postsByUser').doc(uid).collection('All').doc(postId).set(post);
+    await db.collection('postsByUser').doc(uid).collection(category).doc(postId).set(post);
     await db.collection('user').doc(uid).update({
-        categories: {
-            ...userData.categories,
-            All: {
-                category: 'All',
-                numOfPosts: (userData.categories['All'].numOfPosts + 1)
-            },
-            [category]: {
-                category: category,
-                numOfPosts: (userData.categories[category].numOfPosts + 1)
-            }
-        }
-    })
+        "categories.All.numOfPosts": increment,
+        [`categories.${category}.numOfPosts`]: increment
+    });
 };
-export const deletePostDataFromDatabase = async (postId: string) => {
+
+type deletePostInputType = {
+    uid: string;
+    postId: string;
+    category: string;
+};
+export const deletePostDataFromDatabase = async ({category, postId, uid}: deletePostInputType) => {
+    const decrement = firebase.firestore.FieldValue.increment(-1);
     await db.collection('post').doc(postId).delete();
+    await db.collection('postsByUser').doc(uid).collection('All').doc(postId).delete();
+    await db.collection('postsByUser').doc(uid).collection(category).doc(postId).delete();
+    await db.collection('user').doc(uid).update({
+        "categories.All.numOfPosts": decrement,
+        [`categories.${category}.numOfPosts`]: decrement
+    });
 };
 export const updatePostDataOnDatabase = async (post:Post) => {
+    const {
+        category,
+        postId,
+        uid
+    } = post;
     await db.collection('post').doc(post.postId).set(post);
+    await db.collection('postsByUser').doc(uid).collection('All').doc(postId).set(post);
+    await db.collection('postsByUser').doc(uid).collection(category).doc(postId).set(post);
+};
+
+//categoryPosts
+
+export const getCategoryPostsFromDatabase = async (params: getCategoryPostsParams) => {
+    const {
+        uid,
+        category
+    } = params;
+    let data: object | undefined = {}
+    await db.collection('postsByUser').doc(uid).collection(category).get().then((snapshot) => {
+        data = snapshot.docs.map(doc => doc.data());
+    });
+    return data;
 };

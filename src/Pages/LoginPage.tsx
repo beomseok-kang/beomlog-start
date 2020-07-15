@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 function LoginPage() {
     return (
         <div className="login-page">
-            <div className="inner">
+            <div className="login-container inner">
                 <h1>Beomlog</h1>
                 <FormContainer />
                 <div className="link-to-container">

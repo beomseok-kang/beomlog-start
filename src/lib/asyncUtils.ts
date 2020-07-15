@@ -31,15 +31,33 @@ export const createPostSaga = (type: string, promiseCreator: any) => {
                 type: SUCCESS,
                 payload: result,
                 meta: postId
-            })
+            });
         } catch (e) {
             yield put({
                 type: ERROR,
                 payload: e,
                 error: true,
                 meta: postId
-            })
+            });
         }
     }
 };
 
+export const createCategoryPostsSaga = (type: string, promiseCreator: any) => {
+    const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
+
+    return function* saga(action: any) {
+        try {
+            const result = yield call(promiseCreator, action.payload);
+            yield put({
+                type: SUCCESS,
+                payload: result,
+            });
+        } catch (e) {
+            yield put({
+                type: ERROR,
+                payload: e
+            })
+        }
+    }
+};

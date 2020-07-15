@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Modules';
 import Button from '../../Components/Shared/Button';
 import Loader from '../../Components/Shared/Loader';
-import { updateUserData } from '../../Modules/user';
+import { updateUserData, getUserData } from '../../Modules/user';
 import { loadDialog } from '../../Modules/dialog';
 import { useHistory } from 'react-router-dom';
 
@@ -83,6 +83,11 @@ function UserSettingsContainer() {
                     }
                 )
             );
+            dispatch(
+                getUserData(
+                    user.uid
+                )
+            );
             dispatchUpdateSuccessDialog();
             setisLoading(false);
             routerHistory.push({ pathname: '/home' });
@@ -97,7 +102,7 @@ function UserSettingsContainer() {
     }
 
     return (
-        <div className="user-setting-container">
+        <div className="user-setting-container inner">
             {
                 isLoading
                 ? <Loader />

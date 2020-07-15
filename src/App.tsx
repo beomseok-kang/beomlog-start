@@ -10,6 +10,7 @@ import PostPage from './Pages/PostPage';
 import WritingPage from './Pages/WritingPage';
 import UpdatePage from './Pages/UpdatePage';
 import UserSettingsPage from './Pages/UserSettingsPage';
+import './App.scss';
 
 
 const firebaseConfig = {
@@ -22,11 +23,12 @@ const firebaseConfig = {
   appId: "1:130805323864:web:bbcec3822a13a38139922d",
   measurementId: "G-KT4F1VCYFG"
 };
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig)
 firebase.analytics();
 export const db = firebase.firestore();
 
 function App() {
+
   return (
     <>
       <Route path="/auth" component={LoginPage} exact/>

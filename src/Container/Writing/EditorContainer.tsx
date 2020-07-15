@@ -7,6 +7,7 @@ import { uploadPost, updatePost } from '../../Modules/post';
 import Loader from '../../Components/Shared/Loader';
 import { loadDialog } from '../../Modules/dialog';
 import { useHistory } from 'react-router-dom';
+import { getUserData } from '../../Modules/user';
 
 type EditorContainerProps = {
     isUpdating: boolean;
@@ -103,6 +104,11 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
                         }
                     )
                 );
+                dispatch(
+                    getUserData(
+                        user.uid
+                    )
+                );
                 dispatchUpdateSuccessDialog();
                 setIsLoading(false);
                 routerHistory.push({ pathname: `/post/${post.postId}` });
@@ -112,7 +118,7 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
                 setIsLoading(false);
             }
         } else {
-            const postId = `${time.toISOString()}_${user.uid}`;
+            const postId = `${time.toUTCString()}_${user.uid}`;
 
             setIsLoading(true);
     
@@ -133,6 +139,12 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
                                 categories: user.categories ? user.categories : {}
                             }
                         }
+                    )
+                );
+                console.log(user.uid);
+                dispatch(
+                    getUserData(
+                        user.uid
                     )
                 );
                 dispatchUploadSuccessDialog();
@@ -160,14 +172,14 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
     const categoriesToArray = user.categories ? Object.values(user.categories) : [];
 
     return (
-        <div className="editor-container">
+        <div className="editor-container inner">
             { isLoading
             ? <Loader />
             : <>
                 <select value={categoryValue} onChange={onChangeSelectCategory}>
                     {
                         user.categories
-                        ? categoriesToArray.map(category => (
+                        ? categoriesToArray.map(category => (category.category !== 'All') && (
                             <option value={category.category}>
                                 {category.category}
                             </option>

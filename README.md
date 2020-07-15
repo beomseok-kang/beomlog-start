@@ -1,10 +1,25 @@
 # Beomlog
 
 
+### Ver 0.0.7
+
+getCategoryPosts done.
+
+Post CRUD all finished with better data structure in firebase.
+
+Needs to be done next:
+1. Profile img upload
+2. Decorate things!
+
+
 ### Ver 0.0.6
+
 Post UD Finished.
+
 Update Page added.
+
 EditorContainer and Editor updated with some props added.
+
 UPDATE_POST and DELETE_POST logics on reducer done.
 
 Needs to be done next:
@@ -12,9 +27,13 @@ Needs to be done next:
 2. Profile img upload
 
 ### Ver 0.0.5
+
 Post Redux, redux-saga, and logics added.
+
 Writing Page added.
+
 Post Page added.
+
 firebase post uploading logics added.
 
 Needs to be done next:
@@ -23,9 +42,13 @@ Needs to be done next:
 3. profile img upload
 
 ### Ver 0.0.4
+
 Header for CategoryPage, HomePage done.
+
 Connecting to the Firebase and getting the UserData (Redux Saga Middleware) done.
+
 Toggle Menu done.
+
 Saga, RootSaga, RootReducer Update.
 
 Needs to be done next:
@@ -34,8 +57,11 @@ Needs to be done next:
 3. build writing page
 
 ### Ver 0.0.3
+
 RegisterPage, some issues fixed.
+
 RegisterPage and LoginPage linked.
+
 firebase user data creating added, firestore connected.
 
 Needs to be done next:
@@ -44,8 +70,11 @@ Needs to be done next:
 3. make homepage
 
 ### Ver 0.0.2
+
 Authentication, connecting to firebase done.
+
 Router done.
+
 Auto remove dialog after 5 seconds done.
 
 Needs to be done next:
@@ -54,6 +83,7 @@ Needs to be done next:
 3. CRUD
 
 ### Ver 0.0.1
+
 Dialog redux, Login page, login form done.
 
 Needs to be done next:

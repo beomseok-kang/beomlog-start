@@ -85,12 +85,11 @@ function HeaderContainer() {
             <UserInfoButton onClick={onClickUserInfoButton}/>
             <UserInfo
                 userData={
-                    user.email && user.name && user.imgUrl && user.categories ? 
+                    user.email && user.name && user.imgUrl ? 
                     {
                         email: user.email,
                         name: user.name,
-                        imgUrl: user.imgUrl,
-                        categories: categoriesToArray
+                        imgUrl: user.imgUrl
                     } :
                     undefined
                 }

@@ -1,4 +1,4 @@
-import { UserData, getPostDataFromDatabase, uploadPostDataToDatabase, deletePostDataFromDatabase, updatePostDataOnDatabase } from "../api/firebase";
+import { getPostDataFromDatabase, uploadPostDataToDatabase, deletePostDataFromDatabase, updatePostDataOnDatabase } from "../api/firebase";
 import { createPostSaga } from "../lib/asyncUtils";
 import { takeEvery } from "redux-saga/effects";
 import { category } from "../Container/Home/HeaderContainer";
@@ -29,9 +29,13 @@ export const getPost = (postId: string) => ({
     payload: postId,
     meta: postId
 });
-export const deletePost = (postId: string) => ({
+export const deletePost = (uid: string, postId: string, category: string) => ({
     type: DELETE_POST,
-    payload: postId,
+    payload: {
+        uid,
+        postId,
+        category
+    },
     meta: postId
 });
 export const updatePost = (

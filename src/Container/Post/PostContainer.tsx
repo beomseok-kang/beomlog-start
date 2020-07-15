@@ -7,6 +7,7 @@ import Loader from '../../Components/Shared/Loader';
 import Button from '../../Components/Shared/Button';
 import { useHistory } from 'react-router-dom';
 import { loadDialog } from '../../Modules/dialog';
+import { getUserData } from '../../Modules/user';
 
 type PostContainerProps = {
     postId: string
@@ -63,7 +64,16 @@ function PostContainer({ postId }: PostContainerProps) {
         setIsLoading(true);
         try {
             dispatch(
-                deletePost(postId)
+                deletePost(
+                    user.uid?user.uid:'',
+                    postId,
+                    post.category
+                )
+            );
+            dispatch(
+                getUserData(
+                    user.uid
+                )
             );
             setIsLoading(false);
             dispatchDeleteSuccessDialog();
@@ -84,7 +94,7 @@ function PostContainer({ postId }: PostContainerProps) {
     }
 
     return (
-        <div className="post-container">
+        <div className="post-container inner">
             {
                 isLoading
                 ? <Loader />
@@ -106,8 +116,8 @@ function PostContainer({ postId }: PostContainerProps) {
                     <div dangerouslySetInnerHTML={{__html: post.editorData}}></div>
                     <div>
                         <span>{post.uid}</span>
-                        <span>{post.userData.email}</span>
-                        <span>{post.userData.name}</span>
+                        <span>{post.userData?.email}</span>
+                        <span>{post.userData?.name}</span>
                         <div>{post.time.toString()}</div>
                     </div>
                 </>

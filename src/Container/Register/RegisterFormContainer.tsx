@@ -87,10 +87,16 @@ function RegisterFormContainer() {
                             name: values.name,
                             email: values.email,
                             imgUrl: URL_TEMPORARY,
-                            categories: [{
-                                category: 'No Category',
-                                numOfPosts: 0
-                            }]
+                            categories: {
+                                'No Category': {
+                                    category: 'No Category',
+                                    numOfPosts: 0
+                                },
+                                'All': {
+                                    category: 'All',
+                                    numOfPosts: 0
+                                }
+                            }
                         }
                     );
                     setIsLoading(false);
