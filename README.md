@@ -1,5 +1,7 @@
 # Beomlog
 
+## Tech Log
+
 You can check the tech log [here](https://lgphone.tistory.com/category/Else/Personal%20Blog%20Building)
 
 ## Project stack
@@ -13,6 +15,7 @@ You can check the tech log [here](https://lgphone.tistory.com/category/Else/Pers
 - CKEditor5
 
 
+## Version Log
 
 ### Ver 0.0.7
 
