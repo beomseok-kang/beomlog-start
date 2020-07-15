@@ -14,7 +14,9 @@ function CategoryPostsList({ categoryPosts }: CategoryPostsListProps ) {
     return (
         <ul className="category-posts-list">
             {
-                categoryPosts.map(post => (
+                categoryPosts.length === 0
+                ? <div>There are no posts.</div>
+                : categoryPosts.map(post => (
                     <li key={post.postId}>
                         <Link to={`/post/${post.postId}`}>
                             <span>{post.title}</span>

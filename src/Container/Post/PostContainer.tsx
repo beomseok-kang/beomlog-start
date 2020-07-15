@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { PostState, getPost, deletePost } from '../../Modules/post';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Modules';
@@ -17,10 +17,10 @@ function PostContainer({ postId }: PostContainerProps) {
 
     const post: PostState = useSelector((state: RootState) => state.post);
     const user = useSelector((state: RootState) => state.user);
+    const loading = useSelector((state: RootState) => state.loading);
     const dispatch = useDispatch();
     const routerHistory = useHistory();
 
-    const [isLoading, setIsLoading] = useState(true);
     const isWriter = user.uid === post.uid;
 
     useEffect(() => {
@@ -28,10 +28,8 @@ function PostContainer({ postId }: PostContainerProps) {
             dispatch(
                 getPost(postId)
             );
-            setIsLoading(false);
         } catch (e) {
             console.log(e);
-            setIsLoading(false);
         }
     }, [dispatch, postId]);
 
@@ -61,7 +59,6 @@ function PostContainer({ postId }: PostContainerProps) {
     //////// onclick methods ///////////////
 
     const onClickDeleteButton = () => {
-        setIsLoading(true);
         try {
             dispatch(
                 deletePost(
@@ -75,11 +72,9 @@ function PostContainer({ postId }: PostContainerProps) {
                     user.uid
                 )
             );
-            setIsLoading(false);
             dispatchDeleteSuccessDialog();
             routerHistory.push({ pathname: '/home' });
         } catch (e) {
-            setIsLoading(false);
             console.log(e);
             dispatchDeleteWarningDialog();
         }
@@ -96,7 +91,7 @@ function PostContainer({ postId }: PostContainerProps) {
     return (
         <div className="post-container inner">
             {
-                isLoading
+                loading
                 ? <Loader />
                 : <>
                     {isWriter

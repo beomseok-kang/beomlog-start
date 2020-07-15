@@ -101,7 +101,7 @@ function RegisterFormContainer() {
                     );
                     setIsLoading(false);
                     dispatchSignUpSuccessDialog();
-                    routerHistory.push({ pathname: '/home' });
+                    routerHistory.push({ pathname: '/auth' });
                 } catch (e) {
                     console.log(e);
                     setIsLoading(false);

@@ -12,11 +12,10 @@ import { useHistory } from 'react-router-dom';
 function UserSettingsContainer() {
 
     const user = useSelector((state: RootState) => state.user);
+    const loading = useSelector((state: RootState) => state.loading);
     const dispatch = useDispatch();
     const routerHistory = useHistory();
     
-
-    const [isLoading, setisLoading] = useState(false);
     const [nickname, setNickname] = useState(user.name ? user.name : 'no nickname');
     const [showAddItem, setShowAddItem] = useState(false);
     const [categoriesTemp, setCategoriesTemp] = useState(user.categories ? user.categories : {});
@@ -70,7 +69,6 @@ function UserSettingsContainer() {
         setShowAddItem(false);
     }
     const onClickSubmitButton = () => {
-        setisLoading(true);
         try {
             dispatch(
                 updateUserData(
@@ -89,12 +87,10 @@ function UserSettingsContainer() {
                 )
             );
             dispatchUpdateSuccessDialog();
-            setisLoading(false);
             routerHistory.push({ pathname: '/home' });
         } catch (e) {
             console.log(e);
             dispatchUpdateWarningDialog();
-            setisLoading(false);
         }
     };
     const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -104,7 +100,7 @@ function UserSettingsContainer() {
     return (
         <div className="user-setting-container inner">
             {
-                isLoading
+                loading
                 ? <Loader />
                 :
                 <>

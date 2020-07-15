@@ -1,5 +1,6 @@
 # Beomlog
 
+You can check the tech log [here](https://lgphone.tistory.com/category/Else/Personal%20Blog%20Building)
 
 ### Ver 0.0.7
 

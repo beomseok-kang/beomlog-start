@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CategoryPostsState, getCategoryPosts } from '../../Modules/categoryPosts';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Modules';
 import { UserState } from '../../Modules/user';
 import CategoryPostsList from '../../Components/CategoryPage/CategoryPostsList';
+import Loader from '../../Components/Shared/Loader';
 
 type CategoryPostsContainerProps = {
     category: string;
@@ -15,6 +16,7 @@ function CategoryPostsContainer({
 
     const categoryPosts: CategoryPostsState = useSelector((state: RootState) => state.categoryPosts);
     const user: UserState = useSelector((state: RootState) => state.user);
+    const loading = useSelector((state: RootState) => state.loading);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -34,7 +36,11 @@ function CategoryPostsContainer({
 
     return (
         <div className="category-posts-container inner">
-            <CategoryPostsList categoryPosts={categoryPosts}/>
+            {
+                loading
+                ? <Loader />
+                : <CategoryPostsList categoryPosts={categoryPosts}/>
+            }
         </div>
     );
 }

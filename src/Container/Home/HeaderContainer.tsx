@@ -9,7 +9,7 @@ import UserInfo from '../../Components/Shared/UserInfo';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Modules';
 import { loadDialog } from '../../Modules/dialog';
-import { removeUserData } from '../../Modules/user';
+import { removeUserData, getUserData } from '../../Modules/user';
 import ToggleMenu from '../../Components/Shared/ToggleMenu';
 
 export type category = {
@@ -66,6 +66,15 @@ function HeaderContainer() {
         routerHistory.push({ pathname: '/setting' });
     }
     const onClickMenuItem = () => {
+        try {
+            dispatch(
+                getUserData(
+                    user.uid
+                )
+            );
+        } catch (e) {
+            console.log(e);
+        }
         setShowToggleMenu(false);
         setShowUserInfo(false);
     }

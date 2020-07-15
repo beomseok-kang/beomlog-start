@@ -17,6 +17,7 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
 
     const user = useSelector((state: RootState) => state.user);
     const post = useSelector((state: RootState) => state.post);
+    const loading = useSelector((state: RootState) => state.loading);
     const dispatch = useDispatch();
     const routerHistory = useHistory();
 
@@ -38,8 +39,6 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
     const [categoryValue, setCategoryValue] = useState<string>(initialCategoryValue);
     const [data, setData] = useState<string>(initialData);
     const [title, setTitle] = useState<string>(initialTitle);
-
-    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     ////////// dialog ///////////////////////
 
@@ -87,7 +86,6 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
         if (!user.uid) {
             alert('You have to sign in to upload any post.');
         } else if (isUpdating) {
-            setIsLoading(true);
             try {
                 dispatch(
                     updatePost(
@@ -110,18 +108,14 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
                     )
                 );
                 dispatchUpdateSuccessDialog();
-                setIsLoading(false);
                 routerHistory.push({ pathname: `/post/${post.postId}` });
             } catch (e) {
                 console.log(e);
                 dispatchUpdateWarningDialog();
-                setIsLoading(false);
             }
         } else {
             const postId = `${time.toUTCString()}_${user.uid}`;
 
-            setIsLoading(true);
-    
             try {
                 dispatch(
                     uploadPost(
@@ -148,12 +142,10 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
                     )
                 );
                 dispatchUploadSuccessDialog();
-                setIsLoading(false);
                 routerHistory.push({ pathname: `/post/${postId}` });
             } catch (e) {
                 console.log(e);
                 dispatchUploadWarningDialog();
-                setIsLoading(false);
             }
         }
     };
@@ -173,7 +165,7 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
 
     return (
         <div className="editor-container inner">
-            { isLoading
+            { loading
             ? <Loader />
             : <>
                 <select value={categoryValue} onChange={onChangeSelectCategory}>
