@@ -22,6 +22,9 @@ function CategoryPostsList({ categoryPosts }: CategoryPostsListProps ) {
                             <span>{post.title}</span>
                             <span>{post.editorData}</span>
                             <div>{post.category}</div>
+                            <div>{post.userData.email}</div>
+                            <div>{post.userData.imgUrl}</div>
+                            <div>{post.userData.name}</div>
                         </Link>
                     </li>
                 ))

@@ -17,6 +17,18 @@ You can check the tech log [here](https://lgphone.tistory.com/category/Else/Pers
 
 ## Version Log
 
+### Ver 0.0.8
+
+Profile Img Upload done.
+
+Some bugs fixed.
+
+userData collection from posts changed.
+
+Needs to be done next:
+1. Profile img delete after upload
+2. Decorate things!
+
 ### Ver 0.0.7
 
 getCategoryPosts done.

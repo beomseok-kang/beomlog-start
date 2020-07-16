@@ -15,7 +15,7 @@ type RegisterFormValue = {
 
 }
 
-const URL_TEMPORARY = 'https://cgeimage.commutil.kr/phpwas/restmb_allidxmake.php?idx=3&simg=20190629190225005333cf949c6b911045166174.jpg';
+const URL_TEMPORARY = 'https://ssl.pstatic.net/static/common/myarea/myInfo.gif';
 
 function RegisterFormContainer() {
     

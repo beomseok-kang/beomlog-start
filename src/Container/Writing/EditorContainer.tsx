@@ -96,9 +96,7 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
                             category: categoryValue,
                             uid: post.uid,
                             time,
-                            userData: {
-                                ...post.userData
-                            }
+                            email: post.email,
                         }
                     )
                 );
@@ -126,12 +124,7 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
                             category: categoryValue,
                             uid: user.uid ? user.uid : 'no userdata',
                             time,
-                            userData: {
-                                email: user.email ? user.email : 'no userdata',
-                                name: user.name ? user.name : 'no userdata',
-                                imgUrl: user.imgUrl ? user.imgUrl : 'no userdata',
-                                categories: user.categories ? user.categories : {}
-                            }
+                            email: user.email ? user.email : 'no userdata',
                         }
                     )
                 );

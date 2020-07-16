@@ -5,16 +5,31 @@ import './UserSetting.scss';
 type UserSettingProps = {
     userState: UserState;
     nicknameValue: string;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+    newImgFileDir: string | null;
+    onChangeNicnameValue: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChangeImgFile: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function UserSetting({ userState, nicknameValue, onChange }: UserSettingProps) {
+function UserSetting({ userState, newImgFileDir, nicknameValue, onChangeNicnameValue, onChangeImgFile }: UserSettingProps) {
+    
+    
     return (
         <div className="user-setting-wrapper">
             <div>{userState.email}</div>
-            <input type="name" value={nicknameValue} onChange={onChange}/>
-            <img src={userState.imgUrl} alt="profile"/>
+            <input type="name" value={nicknameValue} onChange={onChangeNicnameValue}/>
+            <img src={newImgFileDir || userState.imgUrl} alt="profile"/>
+            <input
+                type="file"
+                name="myImage"
+                accept="image/x-png,image/gif,image/jpeg"
+                onChange={onChangeImgFile}
+            />
         </div>
     );
 }
+
+UserSetting.defaultProps = {
+    newImgFile: null
+};
+
 export default UserSetting;

@@ -19,7 +19,7 @@ const UPDATE_POST = 'post/UPDATE_POST';
 const UPDATE_POST_SUCCESS = 'post/UPDATE_POST_SUCCESS';
 const UPDATE_POST_ERROR = 'post/UPDATE_POST_ERROR';
 
-export const uploadPost = (post: Post) => ({
+export const uploadPost = (post: PostDataInDatabase) => ({
     type: UPLOAD_POST,
     payload: post,
     meta: post.postId
@@ -39,7 +39,7 @@ export const deletePost = (uid: string, postId: string, category: string) => ({
     meta: postId
 });
 export const updatePost = (
-    post: Post
+    post: PostDataInDatabase
 ) => ({
     type: UPLOAD_POST,
     payload: post,
@@ -48,13 +48,17 @@ export const updatePost = (
 
 ///////////////////// state /////////////////////////
 
-export type Post = {
+export type PostDataInDatabase = {
     postId: string;
     title: string;
     editorData: string;
     category: string;
     uid: string; //writer uid
     time: any;
+    email: string;
+}
+
+export type Post = PostDataInDatabase & {
     userData: {
         email: string,
         name: string,
@@ -75,6 +79,7 @@ const initialState: PostState = {
     category: '',
     uid: '',
     time: '',
+    email: '',
     userData: {
         email: '',
         name: '',

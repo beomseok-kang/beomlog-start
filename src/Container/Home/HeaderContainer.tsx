@@ -99,16 +99,16 @@ function HeaderContainer() {
             />
             <HamburgerButton showToggleMenu={showToggleMenu} onClick={onClickHamburgerButton}/>
             <Logo />
-            <UserInfoButton onClick={onClickUserInfoButton}/>
+            <UserInfoButton imgUrl={user.imgUrl} onClick={onClickUserInfoButton}/>
             <UserInfo
                 userData={
-                    user.email && user.name && user.imgUrl ? 
-                    {
+                    user.email && user.name && user.imgUrl
+                    ? {
                         email: user.email,
                         name: user.name,
                         imgUrl: user.imgUrl
-                    } :
-                    undefined
+                    }
+                    : undefined
                 }
                 showUserInfo = {showUserInfo}
                 onClickSettingsButton={onClickSettingsButton}

@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import 'firebase/firestore';
-import { db } from '../App';
-import { Post } from '../Modules/post';
+import { db, storage } from '../App';
+import { PostDataInDatabase } from '../Modules/post';
 import { UserState } from '../Modules/user';
 import { getCategoryPostsParams } from '../Modules/categoryPosts';
 
@@ -80,22 +80,25 @@ export const updateUserDataOnDatabase = async (userState: UserState) => {
 //post
 
 export const getPostDataFromDatabase = async (postId: string) => {
-    let data: object | undefined = {};
+    let data: object | undefined | any = {};
     await db.collection('post').doc(postId).get().then((snapshot) => {
         data = snapshot.data();
     });
+    await db.collection('user').doc(data.uid).get().then((snapshot) => {
+        data.userData = snapshot.data();
+    });
     return data;
 };
-export const uploadPostDataToDatabase = async (post: Post) => {
+export const uploadPostDataToDatabase = async (postData: PostDataInDatabase) => {
     const increment = firebase.firestore.FieldValue.increment(1);
     const {
         category,
         postId,
         uid
-    } = post;
-    await db.collection('post').doc(postId).set(post);
-    await db.collection('postsByUser').doc(uid).collection('All').doc(postId).set(post);
-    await db.collection('postsByUser').doc(uid).collection(category).doc(postId).set(post);
+    } = postData;
+    await db.collection('post').doc(postId).set(postData);
+    await db.collection('postsByUser').doc(uid).collection('All').doc(postId).set(postData);
+    await db.collection('postsByUser').doc(uid).collection(category).doc(postId).set(postData);
     await db.collection('user').doc(uid).update({
         "categories.All.numOfPosts": increment,
         [`categories.${category}.numOfPosts`]: increment
@@ -117,15 +120,15 @@ export const deletePostDataFromDatabase = async ({category, postId, uid}: delete
         [`categories.${category}.numOfPosts`]: decrement
     });
 };
-export const updatePostDataOnDatabase = async (post:Post) => {
+export const updatePostDataOnDatabase = async (postData: PostDataInDatabase) => {
     const {
         category,
         postId,
         uid
-    } = post;
-    await db.collection('post').doc(post.postId).set(post);
-    await db.collection('postsByUser').doc(uid).collection('All').doc(postId).set(post);
-    await db.collection('postsByUser').doc(uid).collection(category).doc(postId).set(post);
+    } = postData;
+    await db.collection('post').doc(postId).set(postData);
+    await db.collection('postsByUser').doc(uid).collection('All').doc(postId).set(postData);
+    await db.collection('postsByUser').doc(uid).collection(category).doc(postId).set(postData);
 };
 
 //categoryPosts & homePosts
@@ -135,16 +138,59 @@ export const getCategoryPostsFromDatabase = async (params: getCategoryPostsParam
         uid,
         category
     } = params;
-    let data: object | undefined = {};
+    let data: object | undefined | any = {};
     await db.collection('postsByUser').doc(uid).collection(category).get().then((snapshot) => {
         data = snapshot.docs.map(doc => doc.data());
     });
+    await db.collection('user').doc(uid).get().then((snapshot) => {
+        data.map((docData: any) => {
+            let docDataTemp = docData;
+            docDataTemp.userData = snapshot.data();
+            return docDataTemp
+        });
+    })
     return data;
 };
+
+const getUserDataPromiseFromUid = (uid: string) => {
+    return db.collection('user').doc(uid).get().then((snapshot) => {
+        return snapshot.data();
+    });
+};
+const getDataFromUidArray = async (data: any, uidArray: Array<string>) => {
+    let result = data;
+    for (let i = 0; i < uidArray.length; i++) {
+        await getUserDataPromiseFromUid(uidArray[i]).then((userData: any) => {
+            result.map((docData: any) => {
+                if (userData.email !== docData.email) return docData;
+                let docDataTemp = docData;
+                docDataTemp.userData = userData;
+                return docDataTemp;
+            });
+        });
+    }
+    
+    return result;
+};
+
 export const getHomePostsFromDatabase = async () => {
-    let data: object | undefined = {};
+    let data: object | undefined | any = {};
     await db.collection('post').orderBy('time', 'desc').limit(10).get().then((snapshot) => {
         data = snapshot.docs.map(doc => doc.data());
     });
+
+    let uidArray: Array<string> = data.map((docData: any) => docData.uid);
+    uidArray = Array.from(new Set(uidArray));
+    data = await getDataFromUidArray(data, uidArray);
     return data;
+};
+
+/////////// Cloud Storage //////////////////////////////////////////
+
+export const uploadImgAndUpdateDatabase = async (uid: string, file: File) => {
+    const fileRef = storage.ref().child(`${uid}_${file.name}`);
+    await fileRef.put(file);
+    fileRef.getDownloadURL().then(async (downloadUrl) => {
+        await db.collection('user').doc(uid).update({ imgUrl: downloadUrl });
+    });
 };

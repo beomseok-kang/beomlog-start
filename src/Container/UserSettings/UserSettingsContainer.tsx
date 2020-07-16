@@ -8,6 +8,7 @@ import Loader from '../../Components/Shared/Loader';
 import { updateUserData, getUserData } from '../../Modules/user';
 import { loadDialog } from '../../Modules/dialog';
 import { useHistory } from 'react-router-dom';
+import { uploadImgAndUpdateDatabase } from '../../api/firebase';
 
 function UserSettingsContainer() {
 
@@ -18,6 +19,8 @@ function UserSettingsContainer() {
     
     const [nickname, setNickname] = useState(user.name ? user.name : 'no nickname');
     const [showAddItem, setShowAddItem] = useState(false);
+    const [imgFile, setImgFile] = useState<null | File>(null);
+    const [imgFileDir, setImgFileDir] = useState<any>(null);
     const [categoriesTemp, setCategoriesTemp] = useState(user.categories ? user.categories : {});
     const [categoryInputValue, setCategoryInputValue] = useState('');
 
@@ -43,10 +46,20 @@ function UserSettingsContainer() {
         );
     };
 
+    /////// file reader /////////////
+    const fr = new FileReader();
+    fr.onload = function () {
+        setImgFileDir(fr.result);
+    }
+
     ////// onchange/onclick ////////////////////////
     const onChangeNickname = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNickname(event.target.value);
     };
+    const onChangeImgFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setImgFile(event.target.files? event.target.files[0] : null);
+        if (event.target.files && event.target.files[0]) fr.readAsDataURL(event.target.files[0]);
+    }
     const onClickAddButton = () => {
         if (!showAddItem) {
             setShowAddItem(true);
@@ -68,7 +81,8 @@ function UserSettingsContainer() {
     const onClickXButton = () => {
         setShowAddItem(false);
     }
-    const onClickSubmitButton = () => {
+    const onClickSubmitButton = async () => {
+
         try {
             dispatch(
                 updateUserData(
@@ -81,6 +95,7 @@ function UserSettingsContainer() {
                     }
                 )
             );
+            if (imgFileDir) await uploadImgAndUpdateDatabase(user.uid!, imgFile!);
             dispatch(
                 getUserData(
                     user.uid
@@ -97,6 +112,8 @@ function UserSettingsContainer() {
         setCategoryInputValue(event.target.value);
     }
 
+    
+
     return (
         <div className="user-setting-container inner">
             {
@@ -107,7 +124,9 @@ function UserSettingsContainer() {
                     <UserSetting
                         userState={user}
                         nicknameValue={nickname}
-                        onChange={onChangeNickname}
+                        newImgFileDir={imgFileDir}
+                        onChangeNicnameValue={onChangeNickname}
+                        onChangeImgFile={onChangeImgFile}
                     />
                     <CategorySetting
                         categories={categoriesTemp}

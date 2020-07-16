@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { CategoryPostsState, getCategoryPosts } from '../../Modules/categoryPosts';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Modules';
-import { UserState } from '../../Modules/user';
+import { UserState, getUserData } from '../../Modules/user';
 import CategoryPostsList from '../../Components/CategoryPage/CategoryPostsList';
 import Loader from '../../Components/Shared/Loader';
 
@@ -27,6 +27,11 @@ function CategoryPostsContainer({
                         uid: user.uid!,
                         category: category
                     }
+                )
+            );
+            dispatch(
+                getUserData(
+                    user.uid
                 )
             );
         } catch (e) {
