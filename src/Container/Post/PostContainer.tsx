@@ -8,6 +8,7 @@ import Button from '../../Components/Shared/Button';
 import { useHistory } from 'react-router-dom';
 import { loadDialog } from '../../Modules/dialog';
 import { getUserData } from '../../Modules/user';
+import { timeStamp, time } from 'console';
 
 type PostContainerProps = {
     postId: string
@@ -88,12 +89,33 @@ function PostContainer({ postId }: PostContainerProps) {
         return <div>There is an error: {post.error}</div>;
     }
 
+    const time = post.time ? post.time.toDate().toString() : null;
+
     return (
         <div className="post-container inner">
             {
                 loading
                 ? <Loader />
                 : <>
+                    <div className="category">{post.category}</div>
+                    <h1>
+                        {post.title}
+                        <div className="written-time">{time}</div>
+                    </h1>
+                    <section className="section--content">
+                        <div 
+                            className="content-wrapper"
+                            dangerouslySetInnerHTML={{__html: post.editorData}}
+                        >
+                        </div>
+                        <div className="post-user-info-wrapper">
+                            <img src={post.userData.imgUrl} alt="profile"/>
+                            <div className="user-data">
+                                <div>{post.userData.name}</div>
+                                <div>{post.userData.email}</div>
+                            </div>
+                        </div>
+                    </section>
                     {isWriter
                         ? <>
                             <Button type="button" onClick={onClickEditButton}>
@@ -105,16 +127,6 @@ function PostContainer({ postId }: PostContainerProps) {
                         </>
                         : null
                     }
-                    <div>{postId}</div>
-                    <h1>{post.title}</h1>
-                    <h3>{post.category}</h3>
-                    <div dangerouslySetInnerHTML={{__html: post.editorData}}></div>
-                    <div>
-                        <span>{post.uid}</span>
-                        <span>{post.userData?.email}</span>
-                        <span>{post.userData?.name}</span>
-                        <div>{post.time.toString()}</div>
-                    </div>
                 </>
             }
         </div>

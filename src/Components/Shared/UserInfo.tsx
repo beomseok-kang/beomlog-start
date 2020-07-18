@@ -1,5 +1,6 @@
 import React from 'react';
 import './UserInfo.scss';
+import Button from './Button';
 
 type UserData = {
     email: string;
@@ -33,7 +34,7 @@ function UserInfo({
                     ? 
                     <>
                         <button onClick={onClickSettingsButton}>Settings</button>
-                        <button onClick={onClickSignOutButton}>Sign Out</button>
+                        <button className="sign-out" onClick={onClickSignOutButton}>Sign Out</button>
                     </>
                     : <button onClick={onClickLoginButton}>Sign In</button>
                 }

@@ -1,14 +1,4 @@
 .section--home-intro {
     text-align: center;
-    .new-post-button {
-        display: block;
-        max-width: 20rem;
-        min-width: 10rem;
-        height: 4rem;
-        margin: 2rem auto;
-    }
-    
-    .intro-welcome {
-        padding: 6rem 0;
-    }
+    position: relative;
 }

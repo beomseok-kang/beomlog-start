@@ -37,7 +37,7 @@
     margin-bottom: 5px;
     position: relative;
 
-    background: #000000;
+    background: #FFFFFF;
     border-radius: 3px;
 
     z-index: 1;
@@ -63,6 +63,7 @@
  * into a crossmark.
  */
 #menuToggle input:checked~span {
+    background: #011627 !important;
     opacity: 1;
     transform: rotate(45deg) translate(-5px, -20px);
 }
@@ -79,5 +80,6 @@
  * Ohyeah and the last one should go the other direction
  */
 #menuToggle input:checked~span:nth-last-child(2) {
+    background: #011627 !important;
     transform: rotate(-45deg) translate(0, 15px);
 }

@@ -12,6 +12,8 @@ type InputProps = {
 
 function Input({ id, value, type, placeholder, onChange, isValid }: InputProps) {
 
+    const className = isValid === false? "text-input invalid" : "text-input";
+
     return (
         <div>
             <input
@@ -21,7 +23,7 @@ function Input({ id, value, type, placeholder, onChange, isValid }: InputProps) 
                 onChange={onChange}
                 placeholder={placeholder}
                 required
-                className={isValid === false? "invalid" : ""}
+                className={className}
             />
         </div>
     );

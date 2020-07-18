@@ -2,7 +2,7 @@
     display: none;
     width: 16rem;
     border-radius: 4px;
-    box-shadow: 0 3px 20px rgba(#343090, 0.3);
+    box-shadow: 0 5px 20px rgba(#011627, 0.1);
     background: #FFFFFF;
 
     h3 {
@@ -16,9 +16,28 @@
         font-size: 1rem;
     }
     .user-info-button-wrapper {
-        width: max-content;
-        margin: 0 auto;
-        margin-bottom: 1rem;
+        width: 100%;
+        margin: 1rem auto;
+        box-sizing: border-box;
+        padding: 0 1rem;
+        button {
+            cursor: pointer;
+            font-size: 1.25rem;
+            line-height: 1;
+            background: #2EC4B6;
+            color: #EFFFE9;
+            outline: none;
+            border: none;
+            display: block;
+            width: 100%;
+            font-weight: 700;
+            height: 3rem;
+            border-radius: 1.5rem;
+            margin: 1rem 0;
+            &.sign-out {
+                background: #E71D36;
+            }
+        }
     }
     &.on {
         display: block;

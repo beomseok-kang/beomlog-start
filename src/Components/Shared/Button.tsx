@@ -15,7 +15,7 @@ function Button ({
     type
 }: ButtonProps) {
 
-    const className = isFilled ? 'filled' : 'not-filled';
+    const className = isFilled ? 'btn filled' : 'btn not-filled';
 
     return (
         <button

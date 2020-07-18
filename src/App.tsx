@@ -2,7 +2,7 @@ import firebase from 'firebase';
 import React from 'react';
 import LoginPage from './Pages/LoginPage';
 import DialogContainer from './Container/Dialog/DialogContainer';
-import { Route } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import HomePage from './Pages/HomePage';
 import RegisterPage from './Pages/RegisterPage';
 import CategoryPage from './Pages/CategoryPage';
@@ -11,6 +11,7 @@ import WritingPage from './Pages/WritingPage';
 import UpdatePage from './Pages/UpdatePage';
 import UserSettingsPage from './Pages/UserSettingsPage';
 import './App.scss';
+import UnfoundPage from './Pages/UnfoundPage';
 
 
 const firebaseConfig = {
@@ -32,14 +33,18 @@ function App() {
 
   return (
     <>
-      <Route path="/auth" component={LoginPage} exact/>
-      <Route path="/auth/register" component={RegisterPage} exact/>
-      <Route path="/home" component={HomePage} exact />
-      <Route path="/category/:category" component={CategoryPage} exact/>
-      <Route path="/post/:postId" component={PostPage} exact/>
-      <Route path="/upload" component={WritingPage} exact/>
-      <Route path="/update/:postId" component={UpdatePage} exact/>
-      <Route path="/setting" component={UserSettingsPage} exact/>
+      <Switch>
+        <Redirect from="/" to="/home" exact/>
+        <Route path="/auth" component={LoginPage} exact/>
+        <Route path="/auth/register" component={RegisterPage} exact/>
+        <Route path="/home" component={HomePage} exact />
+        <Route path="/category/:category" component={CategoryPage} exact/>
+        <Route path="/post/:postId" component={PostPage} exact/>
+        <Route path="/upload" component={WritingPage} exact/>
+        <Route path="/update/:postId" component={UpdatePage} exact/>
+        <Route path="/setting" component={UserSettingsPage} exact/>
+        <Route render={() => <UnfoundPage />}/>
+      </Switch>
       <DialogContainer />
     </>
   );

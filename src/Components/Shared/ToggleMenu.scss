@@ -1,21 +1,8 @@
 .toggle-menu-wrapper {
     position: fixed;
-    left: 0; top: 0;
-    width: 100vw;
+    left: 0;
+    top: 0;
     height: 100vh;
-    background: rgba(0,0,0,0);
-    z-index: -1;
-    &.on {
-        animation-name: darkenbg;
-        animation-duration: 0.4s;
-        animation-fill-mode: forwards;
-    }
-    &.off {
-        animation-name: lightenbg;
-        animation-duration: 0.4s;
-        animation-fill-mode: forwards;
-    }
-    
     ul.category-list {
         position: absolute;
         background: #FFFFFF;
@@ -23,7 +10,7 @@
         left: 0; top: 0;
         height: 100%;
         transform: translate(-20rem, 0);
-        box-shadow: 0 3px 20px rgba(#343090, 0.3);
+        box-shadow: 0 5px 20px rgba(#011627, 0.1);
         list-style: none;
         padding: 5rem 0 0;
         box-sizing: border-box;
@@ -40,23 +27,26 @@
         }
         li {
             display: flex;
-            height: 3rem;
+            height: 4rem;
             align-items: center;
             box-sizing: border-box;
-            color: #000000;
+            color: #011627;
             cursor: pointer;
             font-size: 1.5rem;
+            line-height: 1;
             padding-left: 1rem;
             a {
+                display: flex;
+                align-items: center;
                 height: 100%;
                 width: 100%;
                 text-decoration: none;
-                color: #000000;
+                color: #011627;
             }
             &:hover {
-                background: rgba(#343090, 0.1);
+                background: #EFFFE9;
             }
-            span {
+            strong {
                 font-weight: 700;
                 font-size: 1.25rem;
                 margin-left: 0.5rem;
@@ -83,30 +73,3 @@
     }
 }
 
-@keyframes darkenbg {
-    0% {
-        background: rgba(0,0,0, 0);
-        z-index: -1;
-    }
-    1% {
-        z-index: 1;
-    }
-    100% {
-        background: rgba(0,0,0, 0.3);
-        z-index: 1;
-    }
-}
-
-@keyframes lightenbg {
-    0% {
-        background: rgba(0,0,0, 0.3);
-        z-index: 1;
-    }
-    99% {
-        z-index: 1;
-    }
-    100% {
-        background: rgba(0,0,0, 0);
-        z-index: -1;
-    }
-}

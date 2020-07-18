@@ -1,0 +1,30 @@
+.new-post-button-wrapper {
+    &.inner {
+        position: absolute;
+    }
+    bottom: -3rem;
+    display: block;
+    margin: 0 auto;
+    left: 0; right: 0;
+    .new-post-button {
+        cursor: pointer;
+        position: relative;
+        z-index: 1;
+        height: 6rem;
+        width: calc(100% - 20rem);
+        transition: 0.2s;
+        font-size: 2rem;
+        font-weight: 600;
+        border: none;
+        border-radius: 3rem;
+        background:#EFFFE9;
+        color: #2EC4B6;
+        text-shadow: 0 0 2px rgba(#2EC4B6, 0.3);
+        box-shadow: 0 5px 20px rgba(#2EC4B6, 0.2);
+        &:hover{
+            background: #011627;
+            color: #EFFFE9;
+            text-shadow: 0 0 2px rgba(#2EC4B6, 0.1);
+        }
+    }
+}

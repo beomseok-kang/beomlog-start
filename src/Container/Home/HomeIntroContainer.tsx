@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../Modules';
 import './HomeIntroContainer.scss';
+import NewPostButton from '../../Components/HomePage/NewPostButton';
+import Intro from '../../Components/HomePage/Intro';
 
 function HomeIntroContainer() {
 
@@ -19,12 +21,8 @@ function HomeIntroContainer() {
 
     return (
         <section className="section--home-intro">
-            <button className="new-post-button" onClick={onClickHomeIntroButton}>Write New Post</button>
-            <div className="intro-welcome">
-                <h1>Welcome to Beomlog!</h1>
-                <p>Beomlog is a private blog space which you can write a post with editor freely!</p>
-                <p>Sign up and start writing a new post!</p>
-            </div>
+            <Intro />
+            <NewPostButton onClick={onClickHomeIntroButton}/>
         </section>
     );
 }

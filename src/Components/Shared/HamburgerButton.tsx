@@ -17,4 +17,4 @@ function HamburgerButton ({ showToggleMenu, onClick }: HamburgerButtonProps) {
     );
 }
 
-export default HamburgerButton;
+export default React.memo(HamburgerButton);

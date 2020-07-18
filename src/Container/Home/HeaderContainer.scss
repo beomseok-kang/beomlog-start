@@ -1,9 +1,24 @@
 header {
     display: flex;
-    height: 80px;
+    height: 6rem;
     justify-content: space-between;
-    box-shadow: 0 3px 20px rgba(#343090, 0.3);
+    box-shadow: 0 5px 20px rgba(#011627, 0.1);
     align-items: center;
-    position: relative;
-    background: #FFFFFF;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    width: 100%;
+    background: #2EC4B6;
+    transition: 0.4s;
+    &.home {
+        background: #FFFFFF;
+        span {
+            background: #011627 !important;
+        }
+        
+    }
+}
+
+.header-behind {
+    height: 6rem;
 }

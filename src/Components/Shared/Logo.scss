@@ -1,12 +1,19 @@
 a.logo {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-align: center;
+    font-weight: 700;
     margin: 3rem 0;
-    color: #343090;
+    color: #FFFFFF;
     font-size: 3rem;
     text-decoration: none;
-
+    transition: 0.2s;
     &:hover {
-        color: rgba(#343090, 0.8);
+        color: #EFFFE9;
+    }
+    
+    &.home {
+        color: #011627;
+        &:hover {
+            color: rgba(#011627, 0.7);
+        }
     }
 }

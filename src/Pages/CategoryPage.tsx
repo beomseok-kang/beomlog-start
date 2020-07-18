@@ -1,6 +1,7 @@
 import React from 'react';
 import HeaderContainer from '../Container/Home/HeaderContainer';
 import CategoryPostsContainer from '../Container/Category/CategoryPostsContainer';
+import CategoryInfoContainer from '../Container/Category/CategoryInfoContainer';
 
 function CategoryPage({ match }: any) {
 
@@ -9,7 +10,10 @@ function CategoryPage({ match }: any) {
     return (
         <>
             <HeaderContainer />
-            <CategoryPostsContainer category={category} />
+            <div className="inner">
+                <CategoryInfoContainer category={category}/>
+                <CategoryPostsContainer category={category} />
+            </div>
         </>
     );
 }

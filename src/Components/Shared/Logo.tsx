@@ -2,13 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Logo.scss';
 
-function Logo() {
+type LogoProps = {
+    isHome: boolean;
+}
+
+function Logo({ isHome }: LogoProps) {
+
+    const className = isHome ? 'logo home' : 'logo';
 
     return (
-        <Link to="/home" className="logo">
+        <Link to="/home" className={className}>
             Beomlog
         </Link>
     );
 }
 
-export default Logo;
+Logo.defaultProps = {
+    isHome: false
+}
+
+export default React.memo(Logo);

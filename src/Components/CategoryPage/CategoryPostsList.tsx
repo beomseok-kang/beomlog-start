@@ -19,12 +19,17 @@ function CategoryPostsList({ categoryPosts }: CategoryPostsListProps ) {
                 : categoryPosts.map(post => (
                     <li key={post.postId}>
                         <Link to={`/post/${post.postId}`}>
-                            <span>{post.title}</span>
-                            <span>{post.editorData}</span>
-                            <div>{post.category}</div>
-                            <div>{post.userData.email}</div>
-                            <div>{post.userData.imgUrl}</div>
-                            <div>{post.userData.name}</div>
+                            <div className="list-category-container">{post.category}</div>
+                            <div className="list-postdata-container">
+                                <h3>{post.title}</h3>
+                                <p dangerouslySetInnerHTML={{__html: post.editorData}}></p>
+                            </div>
+                            <div className="list-userdata-container">
+                                <div className="position-fixer">
+                                    <img src={post.userData.imgUrl} alt="profile img"/>
+                                    <div>{post.userData.name}</div>
+                                </div>
+                            </div>
                         </Link>
                     </li>
                 ))

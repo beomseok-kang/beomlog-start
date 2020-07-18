@@ -11,13 +11,18 @@ import { RootState } from '../../Modules';
 import { loadDialog } from '../../Modules/dialog';
 import { removeUserData, getUserData } from '../../Modules/user';
 import ToggleMenu from '../../Components/Shared/ToggleMenu';
+import Darkener from '../../Components/Shared/Darkener';
 
 export type category = {
     category: string;
     numOfPosts: number;
 };
 
-function HeaderContainer() {
+type HeaderContainerProps = {
+    isHome: boolean;
+}
+
+function HeaderContainer({ isHome }: HeaderContainerProps) {
 
     const user = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch();
@@ -27,6 +32,8 @@ function HeaderContainer() {
     const [showUserInfo, setShowUserInfo] = useState<boolean>(false);
     const [showToggleMenu, setShowToggleMenu] = useState<boolean | undefined>(undefined);
     const routerHistory = useHistory();
+
+    const headerClassName = isHome ? "home" : "";
 
     const dispatchRemoveUserData = () => {
         dispatch(
@@ -90,33 +97,41 @@ function HeaderContainer() {
     const categoriesToArray = user.categories ? Object.values(user.categories) : [];
 
     return (
-        <header>
-            <ToggleMenu
-                onClickMenuItem={onClickMenuItem}
-                showToggleMenu={showToggleMenu}
-                categories={categoriesToArray}
-                onClickUpload={onClickUpload}
-            />
-            <HamburgerButton showToggleMenu={showToggleMenu} onClick={onClickHamburgerButton}/>
-            <Logo />
-            <UserInfoButton imgUrl={user.imgUrl} onClick={onClickUserInfoButton}/>
-            <UserInfo
-                userData={
-                    user.email && user.name && user.imgUrl
-                    ? {
-                        email: user.email,
-                        name: user.name,
-                        imgUrl: user.imgUrl
+        <>
+            <header className={headerClassName}>
+                <ToggleMenu
+                    onClickMenuItem={onClickMenuItem}
+                    showToggleMenu={showToggleMenu}
+                    categories={categoriesToArray}
+                    onClickUpload={onClickUpload}
+                />
+                <HamburgerButton showToggleMenu={showToggleMenu} onClick={onClickHamburgerButton}/>
+                <Logo isHome={isHome}/>
+                <UserInfoButton imgUrl={user.imgUrl} onClick={onClickUserInfoButton}/>
+                <UserInfo
+                    userData={
+                        user.email && user.name && user.imgUrl
+                        ? {
+                            email: user.email,
+                            name: user.name,
+                            imgUrl: user.imgUrl
+                        }
+                        : undefined
                     }
-                    : undefined
-                }
-                showUserInfo = {showUserInfo}
-                onClickSettingsButton={onClickSettingsButton}
-                onClickSignOutButton={onClickSignout}
-                onClickLoginButton={onClickLoginButton}
-            />
-        </header>
+                    showUserInfo = {showUserInfo}
+                    onClickSettingsButton={onClickSettingsButton}
+                    onClickSignOutButton={onClickSignout}
+                    onClickLoginButton={onClickLoginButton}
+                />
+            </header>
+            <Darkener showToggleMenu={showToggleMenu}/>
+            <div className="header-behind"></div>
+        </>
     );
 }
 
-export default HeaderContainer;
+HeaderContainer.defaultProps = {
+    isHome: false
+}
+
+export default React.memo(HeaderContainer);

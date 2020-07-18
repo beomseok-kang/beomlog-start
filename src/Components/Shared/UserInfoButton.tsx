@@ -18,4 +18,4 @@ UserInfoButton.defaultProps = {
     imgUrl: "https://ssl.pstatic.net/static/common/myarea/myInfo.gif"
 }
 
-export default UserInfoButton;
+export default React.memo(UserInfoButton);

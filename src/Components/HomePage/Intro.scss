@@ -1,0 +1,31 @@
+.intro-welcome {
+    padding: 6rem 0;
+    text-align: start;
+    background: #2EC4B6;
+    color: #FFFFFF;
+    text-indent: 2rem;
+    text-shadow: 0 0 2px rgba(#FFFFFF, 0.3);
+    .inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .inner-left {
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 4rem;
+            }
+            p {
+                font-size: 1.5rem;
+                line-height: 1;
+            }
+        }
+        .inner-right {
+            width: 30rem;
+            height: 30rem;
+            background: url(../../img/intro_img.svg);
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    }
+}

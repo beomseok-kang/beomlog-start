@@ -13,12 +13,12 @@ type ToggleMenuProps = {
 function ToggleMenu({ showToggleMenu, onClickMenuItem, onClickUpload, categories }: ToggleMenuProps) {
 
     const onOff = showToggleMenu === undefined ? '' : showToggleMenu === true ? ' on' : ' off';
-    const divClassName = "toggle-menu-wrapper" + onOff;
-    const ulClassName = "category-list" + onOff;
+    
+    const className = "category-list" + onOff;
 
     return (
-        <div className={divClassName}>
-            <ul className={ulClassName}>
+        <div className="toggle-menu-wrapper">
+            <ul className={className}>
                 <li key="home">
                     <Link to="/home" onClick={onClickMenuItem}>
                         Home
@@ -29,9 +29,9 @@ function ToggleMenu({ showToggleMenu, onClickMenuItem, onClickUpload, categories
                         <li key={category.category}>
                             <Link to={`/category/${category.category}`} onClick={onClickMenuItem}>
                                 {category.category}
-                                <span>
+                                <strong>
                                     ({category.numOfPosts.toString()})
-                                </span>
+                                </strong>
                             </Link>
                         </li>
                     ))
@@ -44,4 +44,4 @@ function ToggleMenu({ showToggleMenu, onClickMenuItem, onClickUpload, categories
     );
 }
 
-export default ToggleMenu;
+export default React.memo(ToggleMenu);

@@ -24,11 +24,17 @@ function HomePostsContainer() {
     }, [dispatch]);
 
     return (
-        <div className="home-posts-container">
+        <div className="home-posts-container inner">
             {
                 loading
                 ? <Loader />
-                : <CategoryPostsList categoryPosts={homePosts}/>
+                : <>
+                    <h2>
+                        Latest posts
+                    </h2>
+                    <CategoryPostsList categoryPosts={homePosts}/>
+                </>
+
             }
         </div>
     );

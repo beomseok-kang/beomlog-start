@@ -40,7 +40,7 @@ function CategoryPostsContainer({
     }, [dispatch, category, user.uid]);
 
     return (
-        <div className="category-posts-container inner">
+        <div className="category-posts-container">
             {
                 loading
                 ? <Loader />
