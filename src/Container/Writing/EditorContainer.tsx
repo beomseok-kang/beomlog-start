@@ -96,6 +96,7 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
                             category: categoryValue,
                             uid: post.uid,
                             time,
+                            comments: post.comments,
                             email: post.email,
                         }
                     )
@@ -124,6 +125,7 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
                             category: categoryValue,
                             uid: user.uid ? user.uid : 'no userdata',
                             time,
+                            comments: [],
                             email: user.email ? user.email : 'no userdata',
                         }
                     )

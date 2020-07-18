@@ -1,7 +1,14 @@
 .category-info-container {
+    position: relative;
     margin: 4rem 0;
     h2 {
         font-size: 2rem;
         text-indent: 2rem;
+        margin: 2rem 0;
+    }
+    button {
+        position: absolute;
+        top: 0;
+        right: 0;
     }
 }

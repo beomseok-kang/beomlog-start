@@ -87,6 +87,7 @@ function RegisterFormContainer() {
                             name: values.name,
                             email: values.email,
                             imgUrl: URL_TEMPORARY,
+                            phrase: "",
                             categories: {
                                 'No Category': {
                                     category: 'No Category',

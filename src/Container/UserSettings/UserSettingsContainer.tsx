@@ -17,7 +17,8 @@ function UserSettingsContainer() {
     const dispatch = useDispatch();
     const routerHistory = useHistory();
     
-    const [nickname, setNickname] = useState(user.name ? user.name : 'no nickname');
+    const [phrase, setPhrase] = useState(user.phrase ? user.phrase : '');
+    const [nickname, setNickname] = useState(user.name ? user.name : '');
     const [showAddItem, setShowAddItem] = useState(false);
     const [imgFile, setImgFile] = useState<null | File>(null);
     const [imgFileDir, setImgFileDir] = useState<any>(null);
@@ -56,6 +57,9 @@ function UserSettingsContainer() {
     const onChangeNickname = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNickname(event.target.value);
     };
+    const onChangePhraseValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPhrase(event.target.value);
+    };
     const onChangeImgFile = (event: React.ChangeEvent<HTMLInputElement>) => {
         setImgFile(event.target.files? event.target.files[0] : null);
         if (event.target.files && event.target.files[0]) fr.readAsDataURL(event.target.files[0]);
@@ -89,6 +93,7 @@ function UserSettingsContainer() {
                     {
                         uid: user.uid,
                         name: nickname,
+                        phrase: phrase,
                         imgUrl: user.imgUrl ? user.imgUrl : 'no userdata',
                         email: user.email ? user.email : 'no userdata',
                         categories: categoriesTemp
@@ -124,8 +129,10 @@ function UserSettingsContainer() {
                     <UserSetting
                         userState={user}
                         nicknameValue={nickname}
+                        phraseValue={phrase}
                         newImgFileDir={imgFileDir}
                         onChangeNicnameValue={onChangeNickname}
+                        onChangePhraseValue={onChangePhraseValue}
                         onChangeImgFile={onChangeImgFile}
                     />
                     <CategorySetting

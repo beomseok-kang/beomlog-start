@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CategoryPostsState } from '../../Modules/categoryPosts';
 import './CategoryPostsList.scss';
 import { Link } from 'react-router-dom';
@@ -8,14 +8,39 @@ type CategoryPostsListProps = {
     categoryPosts: CategoryPostsState;
 }
 
+function NoPostWrapper() {
+
+    const [showNoPost, setShowNoPost] = useState(false);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setShowNoPost(true);
+        }, 1000)
+    })
+
+    return (
+        <>
+            {
+                showNoPost
+                ? <div className="no-post-wrapper">
+                    <div className="no-post-img">No Post Image</div>
+                    <h2>There is no post here!</h2>
+                    <h3>Write your post here!</h3>
+                </div>
+                : false
+            }
+        </>
+    );
+}
 
 
 function CategoryPostsList({ categoryPosts }: CategoryPostsListProps ) {
+
     return (
         <ul className="category-posts-list">
             {
                 categoryPosts.length === 0
-                ? <div>There are no posts.</div>
+                ? <NoPostWrapper />
                 : categoryPosts.map(post => (
                     <li key={post.postId}>
                         <Link to={`/post/${post.postId}`}>

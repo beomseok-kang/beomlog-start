@@ -1,6 +1,7 @@
 import React from 'react';
 import './UserInfo.scss';
 import Button from './Button';
+import SmallButton from './SmallButton';
 
 type UserData = {
     email: string;
@@ -33,10 +34,10 @@ function UserInfo({
                     userData
                     ? 
                     <>
-                        <button onClick={onClickSettingsButton}>Settings</button>
-                        <button className="sign-out" onClick={onClickSignOutButton}>Sign Out</button>
+                        <SmallButton color="green" isFilled onClick={onClickSettingsButton}>Setting</SmallButton>
+                        <SmallButton color="red" isFilled onClick={onClickSignOutButton}>Sign Out</SmallButton>
                     </>
-                    : <button onClick={onClickLoginButton}>Sign In</button>
+                    : <SmallButton color="green" isFilled onClick={onClickLoginButton}>Sign In</SmallButton>
                 }
             </div>
         </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './ToggleMenu.scss';
 import { category } from '../../Container/Home/HeaderContainer';
+import { MdHome, MdModeEdit, MdFiberManualRecord } from 'react-icons/md'
 
 type ToggleMenuProps = {
     showToggleMenu: boolean | undefined;
@@ -21,13 +22,14 @@ function ToggleMenu({ showToggleMenu, onClickMenuItem, onClickUpload, categories
             <ul className={className}>
                 <li key="home">
                     <Link to="/home" onClick={onClickMenuItem}>
-                        Home
+                        <MdHome /> Home
                     </Link>
                 </li>
                 {
                     categories.map(category => (
                         <li key={category.category}>
                             <Link to={`/category/${category.category}`} onClick={onClickMenuItem}>
+                                <MdFiberManualRecord />
                                 {category.category}
                                 <strong>
                                     ({category.numOfPosts.toString()})
@@ -37,7 +39,7 @@ function ToggleMenu({ showToggleMenu, onClickMenuItem, onClickUpload, categories
                     ))
                 }
                 <li key="upload" onClick={onClickUpload}>
-                    Upload New
+                    <MdModeEdit/> Upload New
                 </li>
             </ul>
         </div>

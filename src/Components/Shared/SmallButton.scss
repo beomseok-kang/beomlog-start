@@ -1,0 +1,45 @@
+.small-btn {
+    cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 1;
+    outline: none;
+    border: none;
+    display: block;
+    padding: 0 2rem;
+    font-weight: 700;
+    height: 3rem;
+    border-radius: 1.5rem;
+    box-sizing: border-box;
+    &.green {
+        background: none;
+        border: 2.5px solid #2EC4B6;
+        color: #2EC4B6;
+        &:hover {
+            background: rgba(#2EC4B6, 0.2);
+        }
+        &.filled {
+            color: #EFFFE9;
+            background: #2EC4B6;
+            &:hover {
+                border: 2.5px solid rgba(#2EC4B6, 0.8);
+                background: rgba(#2EC4B6, 0.8);
+            }
+        }
+    }
+    &.red {
+        background: none;
+        border: 2.5px solid #E71D36;
+        color: #E71D36;
+        &:hover {
+            background: rgba(#E71D36, 0.2);
+        }
+        &.filled {
+            color: #EFFFE9;
+            background: #E71D36;
+            &:hover {
+                border: 2.5px solid rgba(#E71D36, 0.8);
+                background: rgba(#E71D36, 0.8);
+            }    
+        }
+    }
+}

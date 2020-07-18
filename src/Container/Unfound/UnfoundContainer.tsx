@@ -1,13 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import SmallButton from '../../Components/Shared/SmallButton';
+import "./UnfoundContainer.scss";
 
 function UnfoundContainer() {
+
+    const routerHistory = useHistory();
+
+    const onClick = () => {
+        routerHistory.push({ pathname: '/home' });
+    }    
+
     return (
-        <div className="unfound-container inner">
-            The page does not exist!
-            <div>
-                <Link to="/home">To Home</Link>
-            </div>
+        <div className="unfound-container">
+            <h2>Page Not Found</h2>
+            <h3>The Page does not exist!</h3>
+            <div className="unfound-page-img">Unfound Page Image</div>
+            <SmallButton isFilled color="green" onClick={onClick}>To Home</SmallButton>     
         </div>
     );
 }

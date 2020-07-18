@@ -3,17 +3,16 @@ input.text-input {
     background: #FFFFFF;
     border-radius: 2rem;
     font-size: 1.25rem;
-    color: #343090;
     padding: 0.75rem 2rem;
-    border: 2px solid rgba(#6592fd, 0.5);
+    border: 2px solid rgba(#2EC4B6, 0.5);
     box-sizing: border-box;
 
     &:focus {
         outline: none;
-        border: 2px solid #343090;
+        border: 2px solid #2EC4B6;
     }
 
     &.invalid {
-        border: 2px solid #df5757;
+        border: 2px solid #E71D36;
     }
 }

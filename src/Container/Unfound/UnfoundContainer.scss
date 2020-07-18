@@ -1,0 +1,21 @@
+.unfound-container {
+    border-radius: 2rem;
+    padding: 2rem;
+    width: 30rem;
+    text-align: center;
+    color: #E71D36;
+    background: #FFFFFF;    
+    box-shadow: 0 5px 20px rgba(#2EC4B6, 0.2);
+
+    .unfound-page-img {
+        height: 20rem;
+        text-indent: -9999px;
+        background: url(../../img/no_post_img.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    button {
+        margin: 1rem auto;
+    }
+}

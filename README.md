@@ -17,6 +17,16 @@ You can check the tech log [here](https://lgphone.tistory.com/category/Else/Pers
 
 ## Version Log
 
+### Ver 0.0.9
+
+Comment Upload done.
+
+Some Decorations.
+
+Needs to be done next:
+1. decorate the others!
+
+
 ### Ver 0.0.8
 
 Profile Img Upload done.

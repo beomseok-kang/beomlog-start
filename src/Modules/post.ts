@@ -19,6 +19,9 @@ const UPDATE_POST = 'post/UPDATE_POST';
 const UPDATE_POST_SUCCESS = 'post/UPDATE_POST_SUCCESS';
 const UPDATE_POST_ERROR = 'post/UPDATE_POST_ERROR';
 
+const COMMENT_UPDATE = 'post/COMMENT_UPDATE';
+const COMMENT_DELETE = 'post/COMMENT_DELETE';
+
 export const uploadPost = (post: PostDataInDatabase) => ({
     type: UPLOAD_POST,
     payload: post,
@@ -45,8 +48,23 @@ export const updatePost = (
     payload: post,
     meta: post.postId
 });
+export const updateCommentOnPostState = (comment: comment) => ({
+    type: COMMENT_UPDATE,
+    payload: comment
+});
+export const deleteCommentOnPostState = (commentContent: string) => ({
+    type: COMMENT_DELETE,
+    payload: commentContent
+})
 
 ///////////////////// state /////////////////////////
+
+export type comment = {
+    uid: string;
+    nickname: string;
+    comment: string;
+    time: any;
+}
 
 export type PostDataInDatabase = {
     postId: string;
@@ -56,6 +74,7 @@ export type PostDataInDatabase = {
     uid: string; //writer uid
     time: any;
     email: string;
+    comments: comment[];
 }
 
 export type Post = PostDataInDatabase & {
@@ -63,6 +82,7 @@ export type Post = PostDataInDatabase & {
         email: string,
         name: string,
         imgUrl: string,
+        phrase: string,
         categories: {
             [category: string]: category
         }
@@ -80,7 +100,9 @@ const initialState: PostState = {
     uid: '',
     time: '',
     email: '',
+    comments: [],
     userData: {
+        phrase: '',
         email: '',
         name: '',
         imgUrl: '',
@@ -166,6 +188,19 @@ export default function post(state: PostState = initialState, action: any): Post
             return {
                 ...initialState,
                 error: action.payload
+            };
+        case COMMENT_UPDATE:
+            return {
+                ...state,
+                comments: [
+                    ...state.comments,
+                    action.payload
+                ]
+            };
+        case COMMENT_DELETE:
+            return {
+                ...state,
+                comments: state.comments.filter(comment => comment.comment !== action.payload)
             };
         default:
             return state;

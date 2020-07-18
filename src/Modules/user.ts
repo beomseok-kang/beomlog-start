@@ -34,6 +34,7 @@ export type UserState = {
     name?: string;
     email?: string;
     imgUrl?: string;
+    phrase?: string;
     categories?: {
         [category: string]: category
     }

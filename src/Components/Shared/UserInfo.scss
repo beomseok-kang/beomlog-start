@@ -21,22 +21,8 @@
         box-sizing: border-box;
         padding: 0 1rem;
         button {
-            cursor: pointer;
-            font-size: 1.25rem;
-            line-height: 1;
-            background: #2EC4B6;
-            color: #EFFFE9;
-            outline: none;
-            border: none;
-            display: block;
             width: 100%;
-            font-weight: 700;
-            height: 3rem;
-            border-radius: 1.5rem;
-            margin: 1rem 0;
-            &.sign-out {
-                background: #E71D36;
-            }
+            margin-top: 1rem;
         }
     }
     &.on {

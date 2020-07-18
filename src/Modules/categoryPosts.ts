@@ -40,6 +40,7 @@ type categoryPost = {
         email: string,
         name: string,
         imgUrl: string,
+        phrase: string,
         categories: {
             [category: string]: category
         }

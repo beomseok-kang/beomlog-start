@@ -2,24 +2,24 @@
     cursor: pointer;
     border: none;
     background: none;
-    border: 2px solid #343090;
+    border: 2px solid #2EC4B6;
     background: #FFFFFF;
-    color: #343090;
+    color: #2EC4B6;
     font-size: 1.25rem;
     font-weight: 700;
     padding: 0.75rem;
     border-radius: 2rem;
     
     &.filled {
-        background: #343090;
+        background: #2EC4B6;
         color: #FFFFFF;
         &:hover {
-            background: rgba(#343090, 0.9)
+            background: rgba(#2EC4B6, 0.8)
         }
     }
 
     &:hover {
-        background: rgba(#343090, 0.1);
+        background: rgba(#2EC4B6, 0.2);
     }
     &:focus {
         outline: none;

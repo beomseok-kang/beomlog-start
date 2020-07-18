@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import 'firebase/firestore';
 import { db, storage } from '../App';
-import { PostDataInDatabase } from '../Modules/post';
+import { PostDataInDatabase, comment } from '../Modules/post';
 import { UserState } from '../Modules/user';
 import { getCategoryPostsParams } from '../Modules/categoryPosts';
 
@@ -49,6 +49,7 @@ export type UserData = {
     email: string;
     name: string;
     imgUrl: string;
+    phrase: string;
     categories: {
         [category: string]: category
     }
@@ -73,6 +74,7 @@ export const updateUserDataOnDatabase = async (userState: UserState) => {
         name: userState.name,
         email: userState.email,
         imgUrl: userState.imgUrl,
+        phrase: userState.phrase,
         categories: userState.categories
     }); 
 };
@@ -130,6 +132,21 @@ export const updatePostDataOnDatabase = async (postData: PostDataInDatabase) => 
     await db.collection('postsByUser').doc(uid).collection('All').doc(postId).set(postData);
     await db.collection('postsByUser').doc(uid).collection(category).doc(postId).set(postData);
 };
+
+// comment
+
+export const uploadComment = async (commentParams: comment, postId: string) => {
+    await db.collection('post').doc(postId).update({
+        comments: firebase.firestore.FieldValue.arrayUnion(commentParams)
+    });
+}
+
+export const deleteComment = async (commentParams: comment, postId: string) => {
+    await db.collection('post').doc(postId).update({
+        comments: firebase.firestore.FieldValue.arrayRemove(commentParams)
+    });
+}
+
 
 //categoryPosts & homePosts
 
@@ -194,3 +211,4 @@ export const uploadImgAndUpdateDatabase = async (uid: string, file: File) => {
         await db.collection('user').doc(uid).update({ imgUrl: downloadUrl });
     });
 };
+
