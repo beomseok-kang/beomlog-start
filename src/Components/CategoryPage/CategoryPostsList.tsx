@@ -15,7 +15,7 @@ function NoPostWrapper() {
     useEffect(() => {
         setTimeout(() => {
             setShowNoPost(true);
-        }, 1000)
+        }, 500)
     })
 
     return (

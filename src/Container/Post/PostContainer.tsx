@@ -10,7 +10,7 @@ import { getUserData } from '../../Modules/user';
 import SmallButton from '../../Components/Shared/SmallButton';
 import { uploadComment, deleteComment } from '../../api/firebase';
 import { MdDeleteForever } from "react-icons/md";
-import { IconContext } from 'react-icons';
+import NoPostWrapper from '../../Components/PostPage/NoPostWrapper';
 
 type PostContainerProps = {
     postId: string
@@ -27,7 +27,7 @@ function PostContainer({ postId }: PostContainerProps) {
     const [comment, setComment] = useState('');
     const [isUploadingComment, setIsUploadingComment] = useState(false);
 
-    const isWriter = user.uid === post.uid;
+    const isWriter = user && (user.uid === post.uid);
 
     useEffect(() => {
         try {
@@ -126,7 +126,7 @@ function PostContainer({ postId }: PostContainerProps) {
     };
 
     const onClickEditButton = () => {
-        routerHistory.push({ pathname: `/update/${postId}` })
+        routerHistory.push({ pathname: '/update' })
     }
 
     const onChangeCommentInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -180,11 +180,43 @@ function PostContainer({ postId }: PostContainerProps) {
         }
     }
 
-    if (post.error) {
-        return <div>There is an error: {post.error}</div>;
-    }
 
     const time = post.time ? post.time.toDate().toString() : null;
+
+    const commentSection = isUploadingComment ? <Loader /> : (
+        <section className="section--comments">
+            <h3>댓글 <strong>({post.comments.length})</strong></h3>
+            <ul className="comments-wrapper">
+                {
+                    post.comments.map((comment: comment) => (
+                        <li>
+                            <div className="nickname">{comment.nickname}</div>
+                            <div className="comment">{comment.comment}</div>
+                            {
+                                user.uid === comment.uid
+                                ? <button className="comment-delete-button" onClick={() => onClickCommentDeleteButton(comment)}>
+                                    <MdDeleteForever />
+                                </button>
+                                : null
+                            }
+                        </li>
+                    ))
+                }
+            </ul>
+            <h3>댓글 달기</h3>
+            <form className="comment-form" onSubmit={onSubmitComment}>
+                <textarea
+                    rows={5} cols={60}
+                    value={comment}
+                    onChange={onChangeCommentInput}
+                    className="comment-input"
+                    maxLength={100}
+                >
+                </textarea>
+                <button className="comment-button" type="submit">Submit</button>
+            </form>
+        </section>
+    );
 
     const buildBody = (
         <>
@@ -215,46 +247,21 @@ function PostContainer({ postId }: PostContainerProps) {
                     </div>
                 </div>
             </section>
-            <section className="section--comments">
-                <h3>댓글 <strong>({post.comments.length})</strong></h3>
-                <ul className="comments-wrapper">
-                    {
-                        post.comments.map((comment: comment) => (
-                            <li>
-                                <div className="nickname">{comment.nickname}</div>
-                                <div className="comment">{comment.comment}</div>
-                                {
-                                    user.uid === comment.uid
-                                    ? <button className="comment-delete-button" onClick={() => onClickCommentDeleteButton(comment)}>
-                                        <MdDeleteForever />
-                                    </button>
-                                    : null
-                                }
-                            </li>
-                        ))
-                    }
-                </ul>
-                <h3>댓글 달기</h3>
-                <form className="comment-form" onSubmit={onSubmitComment}>
-                    <textarea
-                        rows={5} cols={60}
-                        value={comment}
-                        onChange={onChangeCommentInput}
-                        className="comment-input"
-                        maxLength={100}
-                    >
-                    </textarea>
-                    <button className="comment-button" type="submit">Submit</button>
-                </form>
-            </section>
+
+            {commentSection}
         </>
     );
+
     return (
         <div className="post-container inner">
             {
                 loading
                 ? <Loader />
-                : buildBody
+                : (
+                    post.uid
+                    ? buildBody
+                    : <NoPostWrapper />
+                )
             }
         </div>
     );

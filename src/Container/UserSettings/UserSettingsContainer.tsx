@@ -5,10 +5,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Modules';
 import Button from '../../Components/Shared/Button';
 import Loader from '../../Components/Shared/Loader';
-import { updateUserData, getUserData } from '../../Modules/user';
+import { updateUserData, getUserData, UserState } from '../../Modules/user';
 import { loadDialog } from '../../Modules/dialog';
 import { useHistory } from 'react-router-dom';
 import { uploadImgAndUpdateDatabase } from '../../api/firebase';
+import InvalidAccess from '../../Components/Shared/InvalidAccess';
+import "./UserSettingsContainer.scss";
 
 function UserSettingsContainer() {
 
@@ -16,7 +18,7 @@ function UserSettingsContainer() {
     const loading = useSelector((state: RootState) => state.loading);
     const dispatch = useDispatch();
     const routerHistory = useHistory();
-    
+
     const [phrase, setPhrase] = useState(user.phrase ? user.phrase : '');
     const [nickname, setNickname] = useState(user.name ? user.name : '');
     const [showAddItem, setShowAddItem] = useState(false);
@@ -25,6 +27,8 @@ function UserSettingsContainer() {
     const [categoriesTemp, setCategoriesTemp] = useState(user.categories ? user.categories : {});
     const [categoryInputValue, setCategoryInputValue] = useState('');
 
+
+    
 
     ////// dispatch dialogs ////////////////////////
 
@@ -84,6 +88,7 @@ function UserSettingsContainer() {
     };
     const onClickXButton = () => {
         setShowAddItem(false);
+        setCategoryInputValue('');
     }
     const onClickSubmitButton = async () => {
 
@@ -117,36 +122,45 @@ function UserSettingsContainer() {
         setCategoryInputValue(event.target.value);
     }
 
-    
+    const buildBody = (
+        <>
+            <h2>User Information</h2>
+            <UserSetting
+                userState={user}
+                nicknameValue={nickname}
+                phraseValue={phrase}
+                newImgFileDir={imgFileDir}
+                onChangeNicnameValue={onChangeNickname}
+                onChangePhraseValue={onChangePhraseValue}
+                onChangeImgFile={onChangeImgFile}
+            />
+            <h2>Categories</h2>
+            <CategorySetting
+                categories={categoriesTemp}
+                onClickAddButton={onClickAddButton}
+                onClickXButton={onClickXButton}
+                onInputChange={onInputChange}
+                inputValue={categoryInputValue}
+                showAddItem={showAddItem}
+            />
+            <div className="user-setting-button-wrapper">
+                <Button isFilled type="submit" onClick={onClickSubmitButton}>
+                    Submit
+                </Button>
+            </div>
+        </>
+    );
 
     return (
         <div className="user-setting-container inner">
             {
                 loading
                 ? <Loader />
-                :
-                <>
-                    <UserSetting
-                        userState={user}
-                        nicknameValue={nickname}
-                        phraseValue={phrase}
-                        newImgFileDir={imgFileDir}
-                        onChangeNicnameValue={onChangeNickname}
-                        onChangePhraseValue={onChangePhraseValue}
-                        onChangeImgFile={onChangeImgFile}
-                    />
-                    <CategorySetting
-                        categories={categoriesTemp}
-                        onClickAddButton={onClickAddButton}
-                        onClickXButton={onClickXButton}
-                        onInputChange={onInputChange}
-                        inputValue={categoryInputValue}
-                        showAddItem={showAddItem}
-                    />
-                    <Button type="submit" onClick={onClickSubmitButton}>
-                        Submit
-                    </Button>
-                </>
+                : (
+                    user.uid
+                    ? buildBody
+                    : <InvalidAccess />
+                )
             }
         </div>
     );

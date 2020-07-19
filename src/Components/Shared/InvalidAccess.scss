@@ -1,0 +1,23 @@
+.invalid-wrapper {
+    padding-top: 4rem;
+    text-align: center;
+    h2 {
+        margin: 2rem 0;
+        color: #E71D36;
+        font-size: 2rem;
+    }
+    h3 {
+        margin: 2rem 0;
+        color: #E71D36;
+        font-size: 1.5rem;
+    }
+    .invalid-img {
+        height: 20rem;
+        text-indent: -9999px;
+        background: url(../../img/invalid_access_img.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+
+    }
+}

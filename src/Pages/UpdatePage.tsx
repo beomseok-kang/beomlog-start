@@ -6,14 +6,11 @@ type UpdatePageProps = {
     match: any;
 }
 
-function UpdatePage({ match }: UpdatePageProps) {
-
-    const { postId } = match.params;
+function UpdatePage() {
 
     return (
         <>
             <HeaderContainer />
-            <div>{postId}</div>
             <EditorContainer isUpdating/>
         </>
     );

@@ -17,4 +17,4 @@ SmallButton.defaultProps = {
     isFilled: false
 };
 
-export default SmallButton;
+export default React.memo(SmallButton);

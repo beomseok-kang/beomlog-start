@@ -8,6 +8,9 @@ import Loader from '../../Components/Shared/Loader';
 import { loadDialog } from '../../Modules/dialog';
 import { useHistory } from 'react-router-dom';
 import { getUserData } from '../../Modules/user';
+import Button from '../../Components/Shared/Button';
+import "./EditorContainer.scss";
+import InvalidAccess from '../../Components/Shared/InvalidAccess';
 
 type EditorContainerProps = {
     isUpdating: boolean;
@@ -158,11 +161,16 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
     /////// some useful consts //////////////
     const categoriesToArray = user.categories ? Object.values(user.categories) : [];
 
-    return (
-        <div className="editor-container inner">
-            { loading
-            ? <Loader />
-            : <>
+    const buildBody = (
+        <>
+            <h2>
+                {
+                    isUpdating
+                    ? 'Update Post'
+                    : 'Upload Post'
+                }
+            </h2>
+            <div className="category-title-wrapper">
                 <select value={categoryValue} onChange={onChangeSelectCategory}>
                     {
                         user.categories
@@ -174,10 +182,30 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
                         : null
                     }
                 </select>
-                <input type="name" value={title} onChange={onChangeTitleInput}/>
-                <Editor data={initialData} onChange={onChangeEditor}/>
-                <button onClick={onClick}>Submit</button>
-            </>}
+                <input
+                    maxLength={40}
+                    type="name"
+                    value={title}
+                    onChange={onChangeTitleInput}
+                    placeholder="Title"
+                />
+            </div>
+            <Editor data={initialData} onChange={onChangeEditor}/>
+            <Button type="button" onClick={onClick} isFilled>Submit</Button>
+        </>
+    );
+
+    return (
+        <div className="editor-container inner">
+            { 
+                loading
+                ? <Loader />
+                : (
+                    isUpdating && !post.postId
+                    ? <InvalidAccess />
+                    : buildBody
+                )
+            }
         </div>
     );
 }

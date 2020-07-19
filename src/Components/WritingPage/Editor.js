@@ -8,6 +8,7 @@ function Editor({ onChange, data }) {
             editor={ ClassicEditor }
             data={data}
             onChange={onChange}
+            
         />
     );
 }

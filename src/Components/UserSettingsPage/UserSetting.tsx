@@ -17,10 +17,13 @@ function UserSetting({ userState, newImgFileDir, nicknameValue, phraseValue, onC
     
     return (
         <div className="user-setting-wrapper">
+            <h3>Email</h3>
             <div>{userState.email}</div>
+            <h3>Nickname</h3>
             <input type="name" value={nicknameValue} onChange={onChangeNicnameValue}/>
+            <h3>Self-Intro</h3>
             <input type="name" value={phraseValue} onChange={onChangePhraseValue}/>
-            
+            <h3>Profile Image</h3>
             <img src={newImgFileDir || userState.imgUrl} alt="profile"/>
             <input
                 type="file"

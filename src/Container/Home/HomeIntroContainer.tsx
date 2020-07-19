@@ -19,9 +19,11 @@ function HomeIntroContainer() {
         }
     };
 
+    const intro = user.name ? <Intro isSignedIn name={user.name} /> : <Intro />;
+
     return (
         <section className="section--home-intro">
-            <Intro />
+            {intro}
             <NewPostButton onClick={onClickHomeIntroButton}/>
         </section>
     );

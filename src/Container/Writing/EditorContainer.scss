@@ -1,2 +1,77 @@
 .editor-container {
+
+    h2 {
+        margin-top: 4rem;
+        font-size: 2rem;
+        text-indent: 2rem;
+    }
+    .category-title-wrapper {
+        height: 8rem;
+        margin: 2rem 0;
+        select {
+            margin: 2rem;
+            display: block;
+            width: 20%;
+            height: 37.5%;
+            border: none;
+            outline: none;
+            font-size: 1.1rem;
+            border-radius: 1.5rem;
+            padding: 0 1rem;
+            border: 1.5px solid #2EC4B6;
+            option {
+                font-size: 1.1rem;
+            }
+        }
+        input {
+            margin: 2rem;
+            display: block;
+            width: calc(100% - 4rem);
+            height: 37.5%;
+            font-size: 1.5rem;
+            outline: none;
+            border: none;
+            background: none;
+            border-bottom: 1px solid rgba(#2EC4B6, 0.5);
+            box-sizing: border-box;
+            &:focus {
+                border-bottom: 1.5px solid #2EC4B6;
+            }
+        }
+    }
+
+    button.btn {
+        margin-top: 2rem;
+        float: right;
+        width: 10rem;
+    }
+
+    .ck {
+        .ck-reset-all {
+            color: #011627;
+            border-collapse: unset;
+        }
+        .ck-toolbar {
+            border: 1.5px solid #2EC4B6;
+            background: #EFFFE9;
+            border-radius: 1rem 1rem 0 0 !important;
+        }
+        .ck-editor__editable {
+            min-height: 20rem;
+            border: 1px solid #2EC4B6;
+            &:not(.ck-focused) {
+                border: 1.5px solid #2EC4B6;
+                border-top: none;
+                border-radius: 0 0 1rem 1rem;
+            }
+            &:not(.ck-editor__nested-editable).ck-focused {
+                border: 1.5px solid #2EC4B6;
+                border-top: none;
+                box-shadow: none;
+                border-radius: 0 0 1rem 1rem;
+            }
+        }
+
+    }
+    
 }

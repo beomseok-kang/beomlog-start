@@ -1,6 +1,5 @@
 import React from 'react';
 import './UserInfo.scss';
-import Button from './Button';
 import SmallButton from './SmallButton';
 
 type UserData = {

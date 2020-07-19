@@ -41,7 +41,7 @@ function App() {
         <Route path="/category/:category" component={CategoryPage} exact/>
         <Route path="/post/:postId" component={PostPage} exact/>
         <Route path="/upload" component={WritingPage} exact/>
-        <Route path="/update/:postId" component={UpdatePage} exact/>
+        <Route path="/update" component={UpdatePage} exact/>
         <Route path="/setting" component={UserSettingsPage} exact/>
         <Route render={() => <UnfoundPage />}/>
       </Switch>
