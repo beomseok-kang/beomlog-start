@@ -155,10 +155,12 @@ function PostContainer({ postId }: PostContainerProps) {
                 );
                 dispatch(updateCommentOnPostState(commentData));
                 dispatchCommentUploadSuccessDialog();
+                setComment('');
                 setIsUploadingComment(false);
             } catch (e) {
                 console.log(e);
                 dispatchCommentUploadWarningDialog();
+                setComment('');
                 setIsUploadingComment(false);
             }
         }
