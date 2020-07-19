@@ -2,6 +2,8 @@
 
 ## Tech Log
 
+You can check the actual website live at [here](https://beomseok-kang.github.io/beomlog-start/home)
+
 You can check the tech log [here](https://lgphone.tistory.com/category/Else/Personal%20Blog%20Building)
 
 ## Project stack
