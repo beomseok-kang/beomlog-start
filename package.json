@@ -2,7 +2,7 @@
   "name": "beomlog-start",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://beomlog.me/",
+  "homepage": "https://beomseok-kang.github.io/beomlog-start",
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^20.0.0",
     "@ckeditor/ckeditor5-react": "^2.1.0",
