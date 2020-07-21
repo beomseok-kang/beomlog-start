@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { CategoryPostsState } from '../../Modules/categoryPosts';
 import './CategoryPostsList.scss';
 import { Link } from 'react-router-dom';
+import { category } from '../../Container/Home/HeaderContainer';
+import { removeTagsFromEditorData } from '../../lib/funcUtils';
 
 
 type CategoryPostsListProps = {
@@ -42,24 +44,55 @@ function CategoryPostsList({ categoryPosts }: CategoryPostsListProps ) {
                 categoryPosts.length === 0
                 ? <NoPostWrapper />
                 : categoryPosts.map(post => (
-                    <li key={post.postId}>
-                        <Link to={`/post/${post.postId}`}>
-                            <div className="list-category-container">{post.category}</div>
-                            <div className="list-postdata-container">
-                                <h3>{post.title}</h3>
-                                <p dangerouslySetInnerHTML={{__html: post.editorData}}></p>
-                            </div>
-                            <div className="list-userdata-container">
-                                <div className="position-fixer">
-                                    <img src={post.userData.imgUrl} alt="profile img"/>
-                                    <div>{post.userData.name}</div>
-                                </div>
-                            </div>
-                        </Link>
-                    </li>
+                    <CategoryListItem
+                        postId={post.postId}
+                        category={post.category}
+                        title={post.title}
+                        editorData={post.editorData}
+                        userData={post.userData}
+                    />
                 ))
             }
         </ul>
+    );
+}
+
+type CategoryListItemProps = {
+    postId: string;
+    category: string;
+    title: string;
+    editorData: string;
+    userData: {
+        email: string,
+        name: string,
+        imgUrl: string,
+        phrase: string,
+        categories: {
+            [category: string]: category
+        }
+    };
+}
+
+function CategoryListItem ({ postId, category, title, editorData, userData }: CategoryListItemProps) {
+
+    const postContent = removeTagsFromEditorData(editorData);
+
+    return (
+        <li key={postId}>
+            <Link to={`/post/${postId}`}>
+                <div className="list-category-container">{category}</div>
+                <div className="list-postdata-container">
+                    <h3>{title}</h3>
+                    <p>{postContent}</p>
+                </div>
+                <div className="list-userdata-container">
+                    <div className="position-fixer">
+                        <img src={userData.imgUrl} alt="profile img"/>
+                        <div>{userData.name}</div>
+                    </div>
+                </div>
+            </Link>
+        </li>
     );
 }
 

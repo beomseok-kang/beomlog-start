@@ -8,9 +8,10 @@ type InputProps = {
     placeholder: string;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     isValid: boolean | null;
+    autoFocus: boolean;
 }
 
-function Input({ id, value, type, placeholder, onChange, isValid }: InputProps) {
+function Input({ id, value, type, placeholder, onChange, isValid, autoFocus }: InputProps) {
 
     const className = isValid === false? "text-input invalid" : "text-input";
 
@@ -24,6 +25,7 @@ function Input({ id, value, type, placeholder, onChange, isValid }: InputProps) 
                 placeholder={placeholder}
                 required
                 className={className}
+                autoFocus={autoFocus}
             />
         </div>
     );
@@ -31,7 +33,8 @@ function Input({ id, value, type, placeholder, onChange, isValid }: InputProps) 
 }
 
 Input.defaultProps = {
-    isValid: null
+    isValid: null,
+    autoFocus: false
 };
 
 export default Input;

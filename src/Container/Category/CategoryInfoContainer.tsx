@@ -15,7 +15,7 @@ function CategoryInfoContainer({ category }: CategoryInfoContainerProps) {
     const user = useSelector((state: RootState) => state.user);
 
     const onClick = () => {
-        if (user.uid) {
+        if (!user.uid) {
             alert('Please sign in to write any post.');
         } else {
             routerHistory.push({ pathname: '/upload' });

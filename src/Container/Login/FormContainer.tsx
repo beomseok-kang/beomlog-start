@@ -98,6 +98,7 @@ function FormContainer() {
                 type="email"
                 placeholder="Email"
                 isValid={isValid}
+                autoFocus={true}
             />
             <Input
                 id="password"

@@ -57,9 +57,11 @@ ul.category-posts-list {
                 margin: 0;
             }
             p {
-                margin: 0;
-                display: flex;
-                max-lines: 1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
             }
         }
         .list-userdata-container {
