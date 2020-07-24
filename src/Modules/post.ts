@@ -44,7 +44,7 @@ export const deletePost = (uid: string, postId: string, category: string) => ({
 export const updatePost = (
     post: PostDataInDatabase
 ) => ({
-    type: UPLOAD_POST,
+    type: UPDATE_POST,
     payload: post,
     meta: post.postId
 });
