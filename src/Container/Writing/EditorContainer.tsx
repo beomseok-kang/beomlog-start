@@ -11,6 +11,7 @@ import { getUserData } from '../../Modules/user';
 import Button from '../../Components/Shared/Button';
 import "./EditorContainer.scss";
 import InvalidAccess from '../../Components/Shared/InvalidAccess';
+import CategoryAndTitle from '../../Components/WritingPage/CategoryAndTitle';
 
 type EditorContainerProps = {
     isUpdating: boolean;
@@ -159,37 +160,17 @@ function EditorContainer({ isUpdating }: EditorContainerProps) {
     };
 
     /////// some useful consts //////////////
-    const categoriesToArray = user.categories ? Object.values(user.categories) : [];
-
+    
     const buildBody = (
         <>
-            <h2>
-                {
-                    isUpdating
-                    ? 'Update Post'
-                    : 'Upload Post'
-                }
-            </h2>
-            <div className="category-title-wrapper">
-                <select value={categoryValue} onChange={onChangeSelectCategory}>
-                    {
-                        user.categories
-                        ? categoriesToArray.map(category => (category.category !== 'All') && (
-                            <option value={category.category}>
-                                {category.category}
-                            </option>
-                        ))
-                        : null
-                    }
-                </select>
-                <input
-                    maxLength={40}
-                    type="name"
-                    value={title}
-                    onChange={onChangeTitleInput}
-                    placeholder="Title"
-                />
-            </div>
+            <CategoryAndTitle 
+                isUpdating={isUpdating}
+                categoryValue={categoryValue}
+                user={user}
+                title={title}
+                onChangeSelectCategory={onChangeSelectCategory}
+                onChangeTitleInput={onChangeTitleInput}
+            />
             <Editor data={initialData} onChange={onChangeEditor}/>
             <Button type="button" onClick={onClick} isFilled>Submit</Button>
         </>

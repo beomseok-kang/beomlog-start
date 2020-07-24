@@ -86,33 +86,37 @@ function FormContainer() {
         });
     }
 
+    const buildBody = (
+        <form onSubmit={onSubmit}>
+            <div className="input-container">
+                <Input
+                    id="email"
+                    onChange={onChange}
+                    value={values.email}
+                    type="email"
+                    placeholder="Email"
+                    isValid={isValid}
+                    autoFocus={true}
+                />
+                <Input
+                    id="password"
+                    onChange={onChange}
+                    value={values.password}
+                    type="password"
+                    placeholder="Password"
+                    isValid={isValid}
+                />
+            </div>
+            <div className="button-container">
+                <Button type="submit" isFilled>Sign In</Button>
+            </div>
+        </form>
+    );
+
     return (
     isLoading
     ? <Loader />
-    : <form onSubmit={onSubmit}>
-        <div className="input-container">
-            <Input
-                id="email"
-                onChange={onChange}
-                value={values.email}
-                type="email"
-                placeholder="Email"
-                isValid={isValid}
-                autoFocus={true}
-            />
-            <Input
-                id="password"
-                onChange={onChange}
-                value={values.password}
-                type="password"
-                placeholder="Password"
-                isValid={isValid}
-            />
-        </div>
-        <div className="button-container">
-            <Button type="submit" isFilled>Sign In</Button>
-        </div>
-    </form>
+    : buildBody
     );
 }
 

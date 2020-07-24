@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Modules';
 import Button from '../../Components/Shared/Button';
 import Loader from '../../Components/Shared/Loader';
-import { updateUserData, getUserData, UserState } from '../../Modules/user';
+import { updateUserData, getUserData } from '../../Modules/user';
 import { loadDialog } from '../../Modules/dialog';
 import { useHistory } from 'react-router-dom';
 import { uploadImgAndUpdateDatabase } from '../../api/firebase';

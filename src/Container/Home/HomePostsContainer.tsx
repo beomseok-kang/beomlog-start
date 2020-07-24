@@ -23,18 +23,22 @@ function HomePostsContainer() {
         }
     }, [dispatch]);
 
+    const buildBody = (
+        <>
+            <h2>
+                Latest posts
+            </h2>
+            <CategoryPostsList categoryPosts={homePosts}/>
+        </>
+
+    );
+
     return (
         <div className="home-posts-container inner">
             {
                 loading
                 ? <Loader />
-                : <>
-                    <h2>
-                        Latest posts
-                    </h2>
-                    <CategoryPostsList categoryPosts={homePosts}/>
-                </>
-
+                : buildBody
             }
         </div>
     );

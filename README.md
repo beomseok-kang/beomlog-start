@@ -19,6 +19,11 @@ You can check the tech log [here](https://lgphone.tistory.com/category/Else/Pers
 
 ## Version Log
 
+### Ver 1.0.0
+
+Refactoring done.
+Deployed on beomlog.me (with help of github pages)
+
 ### Ver 0.0.10
 
 All the things funcitoning well.

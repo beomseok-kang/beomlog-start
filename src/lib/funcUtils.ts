@@ -16,7 +16,7 @@ const tagsLength = tags.length;
 
 export const removeTagsFromEditorData = (editorData: string) => {
 
-    let str = editorData;
+    let str: string = editorData;
     for (let i = 0; i < tagsLength; i++) {
         const search = tags[i];
         const replaceWith = ' ';

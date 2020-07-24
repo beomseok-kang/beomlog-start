@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import SmallButton from '../../Components/Shared/SmallButton';
 import "./UnfoundContainer.scss";
+import PageNotFound from '../../Components/UnfoundPage/PageNotFound';
 
 function UnfoundContainer() {
 
@@ -11,14 +11,7 @@ function UnfoundContainer() {
         routerHistory.push({ pathname: '/home' });
     }    
 
-    return (
-        <div className="unfound-container">
-            <h2>Page Not Found</h2>
-            <h3>The Page does not exist!</h3>
-            <div className="unfound-page-img">Unfound Page Image</div>
-            <SmallButton isFilled color="green" onClick={onClick}>To Home</SmallButton>     
-        </div>
-    );
+    return <PageNotFound onClick={onClick}/>;
 }
 
 export default UnfoundContainer;

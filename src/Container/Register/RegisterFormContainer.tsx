@@ -123,11 +123,8 @@ function RegisterFormContainer() {
         }
     }
     
-
-    return (
-        isLoading
-        ? <Loader />
-        : <form onSubmit={onSubmit}>
+    const buildBody = (
+        <form onSubmit={onSubmit}>
             <div className="input-container">
                 <Input
                     id="name"
@@ -166,7 +163,12 @@ function RegisterFormContainer() {
                 <Button type="submit" isFilled>Sign Up</Button>
             </div>
         </form>
+    );
 
+    return (
+        isLoading
+        ? <Loader />
+        : buildBody
     );
 }
 

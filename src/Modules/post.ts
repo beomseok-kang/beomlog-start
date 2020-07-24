@@ -146,7 +146,7 @@ export default function post(state: PostState = initialState, action: any): Post
             };
         case UPLOAD_POST:
             return {
-                ...action.payload,
+                ...initialState,
                 error: undefined
             };
         case UPLOAD_POST_SUCCESS:

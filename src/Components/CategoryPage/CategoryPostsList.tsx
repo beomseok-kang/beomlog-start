@@ -45,6 +45,7 @@ function CategoryPostsList({ categoryPosts }: CategoryPostsListProps ) {
                 ? <NoPostWrapper />
                 : categoryPosts.map(post => (
                     <CategoryListItem
+                        key={post.postId}
                         postId={post.postId}
                         category={post.category}
                         title={post.title}
@@ -78,7 +79,7 @@ function CategoryListItem ({ postId, category, title, editorData, userData }: Ca
     const postContent = removeTagsFromEditorData(editorData);
 
     return (
-        <li key={postId}>
+        <li>
             <Link to={`/post/${postId}`}>
                 <div className="list-category-container">{category}</div>
                 <div className="list-postdata-container">

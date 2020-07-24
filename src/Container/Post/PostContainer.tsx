@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { PostState, getPost, deletePost, comment, updateCommentOnPostState, deleteCommentOnPostState } from '../../Modules/post';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Modules';
@@ -7,10 +8,10 @@ import Loader from '../../Components/Shared/Loader';
 import { useHistory } from 'react-router-dom';
 import { loadDialog } from '../../Modules/dialog';
 import { getUserData } from '../../Modules/user';
-import SmallButton from '../../Components/Shared/SmallButton';
 import { uploadComment, deleteComment } from '../../api/firebase';
-import { MdDeleteForever } from "react-icons/md";
 import NoPostWrapper from '../../Components/PostPage/NoPostWrapper';
+import CommentSection from '../../Components/PostPage/CommentSection';
+import PostContent from '../../Components/PostPage/PostContent';
 
 type PostContainerProps = {
     postId: string
@@ -182,75 +183,23 @@ function PostContainer({ postId }: PostContainerProps) {
         }
     }
 
-
-    const time = post.time ? post.time.toDate().toString() : null;
-
-    const commentSection = isUploadingComment ? <Loader /> : (
-        <section className="section--comments">
-            <h3>댓글 <strong>({post.comments.length})</strong></h3>
-            <ul className="comments-wrapper">
-                {
-                    post.comments.map((comment: comment) => (
-                        <li>
-                            <div className="nickname">{comment.nickname}</div>
-                            <div className="comment">{comment.comment}</div>
-                            {
-                                user.uid === comment.uid
-                                ? <button className="comment-delete-button" onClick={() => onClickCommentDeleteButton(comment)}>
-                                    <MdDeleteForever />
-                                </button>
-                                : null
-                            }
-                        </li>
-                    ))
-                }
-            </ul>
-            <h3>댓글 달기</h3>
-            <form className="comment-form" onSubmit={onSubmitComment}>
-                <textarea
-                    rows={5} cols={60}
-                    value={comment}
-                    onChange={onChangeCommentInput}
-                    className="comment-input"
-                    maxLength={100}
-                >
-                </textarea>
-                <button className="comment-button" type="submit">Submit</button>
-            </form>
-        </section>
-    );
-
     const buildBody = (
         <>
-            <div className="category">{post.category}</div>
-            <h1>
-                {post.title}
-                <div className="written-time">{time}</div>
-            </h1>
-            <section className="section--content">
-                <div 
-                    className="content-wrapper"
-                    dangerouslySetInnerHTML={{__html: post.editorData}}
-                >
-                </div>
-                {isWriter
-                    ? <div className="buttons-wrapper">
-                        <SmallButton onClick={onClickEditButton} color="green">Edit Post</SmallButton>
-                        <SmallButton onClick={onClickDeleteButton} color="red">Delete</SmallButton>
-                    </div>
-                    : null
-                }
-                <div className="post-user-info-wrapper">
-                    <img src={post.userData.imgUrl} alt="profile"/>
-                    <div className="user-data">
-                        <div className="nickname">{post.userData.name}</div>
-                        <div className="email">{post.userData.email}</div>
-                        <div className="phrase">{post.userData.phrase}</div>
-                    </div>
-                </div>
-            </section>
-
-            {commentSection}
+            <PostContent 
+                post={post}
+                isWriter={isWriter}
+                onClickEditButton={onClickEditButton}
+                onClickDeleteButton={onClickDeleteButton}
+            />
+            <CommentSection 
+                isUploadingComment={isUploadingComment}
+                comments={post.comments}
+                user={user}
+                onSubmitComment={onSubmitComment}
+                onChangeCommentInput={onChangeCommentInput}
+                onClickCommentDeleteButton={onClickCommentDeleteButton}
+                commentValue={comment}
+            />
         </>
     );
 

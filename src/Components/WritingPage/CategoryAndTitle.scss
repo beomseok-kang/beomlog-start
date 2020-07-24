@@ -1,0 +1,34 @@
+.category-title-wrapper {
+    height: 8rem;
+    margin: 2rem 0;
+    select {
+        margin: 2rem;
+        display: block;
+        width: 20%;
+        height: 37.5%;
+        border: none;
+        outline: none;
+        font-size: 1.1rem;
+        border-radius: 1.5rem;
+        padding: 0 1rem;
+        border: 1.5px solid #2EC4B6;
+        option {
+            font-size: 1.1rem;
+        }
+    }
+    input {
+        margin: 2rem;
+        display: block;
+        width: calc(100% - 4rem);
+        height: 37.5%;
+        font-size: 1.5rem;
+        outline: none;
+        border: none;
+        background: none;
+        border-bottom: 1px solid rgba(#2EC4B6, 0.5);
+        box-sizing: border-box;
+        &:focus {
+            border-bottom: 1.5px solid #2EC4B6;
+        }
+    }
+}

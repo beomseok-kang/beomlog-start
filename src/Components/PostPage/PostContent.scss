@@ -1,0 +1,51 @@
+.section--content {
+    border-bottom: 1px solid #e5e5e5;
+    .content-wrapper {
+        padding: 4rem 2rem;
+        p {
+            margin: 0;
+        }
+    }
+    
+    .buttons-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        margin: 2rem;
+        button+button {
+            margin-left: 1rem;
+        }
+    }
+    
+    .post-user-info-wrapper {
+        margin: 0 2rem 2rem;
+        box-sizing: border-box;
+        height: 8rem;
+        display: flex;
+        border: 1px solid #2EC4B6;
+        background: #EFFFE9;
+        align-items: center;
+        img {
+            display: block;
+            padding: 1rem;
+            height: 6rem;
+            width: 6rem;
+            border-radius: 50%;
+        }
+        .user-data {
+            font-weight: 700;
+            margin-left: 4rem;
+            font-size: 1rem;
+            .nickname {
+                font-size: 1.25rem;
+            }
+            .email {
+                margin-top: 0.5rem;
+                font-weight: 400;
+            }
+            .phrase {
+                margin-top: 0.5rem;
+                font-weight: 600;
+            }
+        }
+    }
+}
