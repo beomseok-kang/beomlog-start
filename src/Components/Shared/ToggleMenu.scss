@@ -6,10 +6,10 @@
     ul.category-list {
         position: absolute;
         background: #FFFFFF;
-        width: 20rem;
+        min-width: 20rem;
         left: 0; top: 0;
         height: 100%;
-        transform: translate(-20rem, 0);
+        transform: translate(-100%, 0);
         box-shadow: 0 5px 20px rgba(#011627, 0.1);
         list-style: none;
         padding: 5rem 0 0;
@@ -60,7 +60,7 @@
 
 @keyframes showmenu {
     0% {
-        transform: translate(-20rem, 0);
+        transform: translate(-100%, 0);
     }
     100% {
         transform: translate(0, 0);
@@ -72,7 +72,12 @@
         transform: translate(0, 0);
     }
     100% {
-        transform: translate(-20rem, 0);
+        transform: translate(-100%, 0);
     }
 }
 
+@media (max-width: 400px) {
+    ul.category-list {
+        width: 100vw;
+    }
+}

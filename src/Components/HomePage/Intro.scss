@@ -3,7 +3,6 @@
     text-align: start;
     background: #2EC4B6;
     color: #FFFFFF;
-    text-indent: 2rem;
     text-shadow: 0 0 2px rgba(#FFFFFF, 0.3);
     .inner {
         display: flex;
@@ -20,12 +19,34 @@
             }
         }
         .inner-right {
-            width: 30rem;
+            flex-grow: 1;
+            max-width: 30rem;
             height: 30rem;
             background: url(../../img/intro_img.svg);
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
+        }
+    }
+}
+
+@media (max-width: 876px) {
+    .intro-welcome {
+        padding: 3rem 0;
+        .inner {
+            display: block;
+            .inner-left{
+                h1 {
+                    margin-bottom: 2rem;
+                    text-align: center;
+                }
+                p {
+                    text-align: center;
+                }
+            }
+            .inner-right {
+                margin: 0 auto;
+            }
         }
     }
 }

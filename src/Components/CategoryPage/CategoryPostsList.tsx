@@ -81,10 +81,12 @@ function CategoryListItem ({ postId, category, title, editorData, userData }: Ca
     return (
         <li>
             <Link to={`/post/${postId}`}>
-                <div className="list-category-container">{category}</div>
-                <div className="list-postdata-container">
-                    <h3>{title}</h3>
-                    <p>{postContent}</p>
+                <div className="list-category-and-postdata">
+                    <div className="list-category-container">{category}</div>
+                    <div className="list-postdata-container">
+                        <h3>{title}</h3>
+                        <p>{postContent}</p>
+                    </div>
                 </div>
                 <div className="list-userdata-container">
                     <div className="position-fixer">

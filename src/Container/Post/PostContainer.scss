@@ -1,13 +1,11 @@
 .post-container {
     padding-bottom: 10rem;
     .category {
-        text-indent: 2rem;
-        padding: 2rem 0 1rem;
+        padding: 2rem;
         font-size: 1.5rem;
     }
     h1 {
-        text-indent: 2rem;
-        padding: 2rem 0;
+        padding: 2rem;
         border-bottom: 1px solid #e5e5e5;
         margin: 0;
         .written-time {
@@ -16,4 +14,18 @@
             text-align: end;
         }
     }   
+}
+
+@media (max-width: 876px) {
+    .post-container {
+        .category {
+            padding: 1rem 0;
+        }
+        h1 {
+            padding: 1rem 0;
+            .written-time {
+                font-size: 0.75rem;
+            }
+        }
+    }
 }

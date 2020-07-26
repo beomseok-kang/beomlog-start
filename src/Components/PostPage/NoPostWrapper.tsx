@@ -25,4 +25,4 @@ function NoPostWrapper() {
     );    
 }
 
-export default NoPostWrapper;
+export default React.memo(NoPostWrapper);

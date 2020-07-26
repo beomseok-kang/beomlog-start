@@ -11,3 +11,11 @@
         border-radius: 50%;
     }
 }
+
+@media (max-width: 876px) {
+    .user-info {
+        margin-right: 0.5rem;
+        height: 3rem;
+        width: 3rem;
+    }
+}

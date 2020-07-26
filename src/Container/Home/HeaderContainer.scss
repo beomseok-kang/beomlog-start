@@ -22,3 +22,12 @@ header {
 .header-behind {
     height: 6rem;
 }
+
+@media (max-width: 876px) {
+    header {
+        height: 4rem;
+    }
+    .header-behind {
+        height: 4rem;
+    }
+}

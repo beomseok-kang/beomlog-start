@@ -17,3 +17,9 @@ a.logo {
         }
     }
 }
+
+@media (max-width: 876px) {
+    a.logo {
+        font-size: 2rem;
+    }
+}

@@ -17,6 +17,7 @@
     }
     
     .post-user-info-wrapper {
+        width: 100%;
         margin: 0 2rem 2rem;
         box-sizing: border-box;
         height: 8rem;
@@ -27,8 +28,8 @@
         img {
             display: block;
             padding: 1rem;
-            height: 6rem;
-            width: 6rem;
+            max-height: 6rem;
+            max-width: 6rem;
             border-radius: 50%;
         }
         .user-data {
@@ -45,6 +46,44 @@
             .phrase {
                 margin-top: 0.5rem;
                 font-weight: 600;
+            }
+        }
+    }
+}
+
+@media (max-width: 876px) {
+    .section--content {
+        .content-wrapper {
+            padding: 2rem 0;
+        }
+        .buttons-wrapper {
+            margin: 1rem 0;
+            display: block;
+            button {
+                width: 100%;
+            }
+            button+button {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+        .post-user-info-wrapper {
+            margin: 0 0 1rem;
+            img {
+                max-width: 4rem;
+                max-height: 4rem;
+            }
+            .user-data {
+                margin-left: 1rem;
+                .nickname {
+                    font-size: 1rem;
+                }
+                .email {
+                    font-size: 0.8rem;
+                }
+                .phrase {
+                    font-size: 0.8rem;
+                }
             }
         }
     }

@@ -1,13 +1,7 @@
 .editor-container {
 
-    h2 {
-        margin-top: 4rem;
-        font-size: 2rem;
-        text-indent: 2rem;
-    }
-
     button.btn {
-        margin-top: 2rem;
+        margin: 2rem 0 4rem;
         float: right;
         width: 10rem;
     }
@@ -40,4 +34,13 @@
 
     }
     
+}
+
+@media (max-width: 876px) {
+    .editor-container {
+        button.btn {
+            width: 100%;
+            margin: 1rem 0 2rem;
+        }
+    }   
 }

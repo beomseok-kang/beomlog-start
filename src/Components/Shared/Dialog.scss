@@ -1,6 +1,6 @@
 .dialog {
     padding: 1rem 2rem;
-    border-radius: 2rem;
+    border-radius: 1rem;
     background: #EFFFE9;
     margin-bottom: 1rem;
     margin-right: 1rem;
@@ -49,5 +49,13 @@
     }
     100% {
         opacity: 0;
+    }
+}
+@media (max-width: 876px) {
+    .dialog {
+        margin: 0.5rem;
+        border-radius: 1rem;
+        padding: 0.5rem 1rem;
+        animation-duration: 3s;
     }
 }

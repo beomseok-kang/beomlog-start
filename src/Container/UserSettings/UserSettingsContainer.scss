@@ -9,3 +9,13 @@
         }
     }
 }
+
+@media (max-width: 876px) {
+    .user-setting-container {
+        .user-setting-button-wrapper {
+            button {
+                width: 100%;
+            }
+        }
+    }
+}

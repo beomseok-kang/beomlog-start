@@ -8,3 +8,9 @@ body {
     margin: 0 auto;
     position: relative;
 }
+
+@media (max-width: 1024px) {
+    .inner {
+        padding: 0 1rem;
+    }
+}

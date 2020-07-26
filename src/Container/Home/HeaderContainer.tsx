@@ -52,9 +52,11 @@ function HeaderContainer({ isHome }: HeaderContainerProps) {
 
     const onClickUserInfoButton = () => {
         setShowUserInfo(!showUserInfo);
+        if (showToggleMenu) setShowToggleMenu(false);
     };
     const onClickHamburgerButton = () => {
         setShowToggleMenu(!showToggleMenu);
+        if (showUserInfo) setShowUserInfo(false);
     };
     const onClickLoginButton = () => {
         routerHistory.push({ pathname: '/auth' });

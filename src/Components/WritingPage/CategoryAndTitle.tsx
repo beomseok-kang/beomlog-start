@@ -24,13 +24,13 @@ function CategoryAndTitle({
 
     return (
         <>
-            <h2>
+            <h1>
                 {
                     isUpdating
                     ? 'Update Post'
                     : 'Upload Post'
                 }
-            </h2>
+            </h1>
             <div className="category-title-wrapper">
                 <select value={categoryValue} onChange={onChangeSelectCategory}>
                     {

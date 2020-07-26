@@ -32,3 +32,15 @@
         top: 120%;
     }
 }
+
+@media (max-width: 876px) {
+    .user-info-wrapper {
+        width: 100%;
+        border-radius: 0;
+        box-shadow: unset;
+        &.on {
+            right: 0;
+            top: 100%;
+        }
+    }
+}

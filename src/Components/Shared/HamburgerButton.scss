@@ -11,7 +11,7 @@
 
 #menuToggle input {
     display: block;
-    width: 40px;
+    max-width: 40px;
     height: 32px;
     position: absolute;
     top: -7px;
@@ -82,4 +82,9 @@
 #menuToggle input:checked~span:nth-last-child(2) {
     background: #011627 !important;
     transform: rotate(-45deg) translate(0, 15px);
+}
+@media (max-width: 876px) {
+    #menuToggle {
+        margin-left: 0.5rem;
+    }
 }

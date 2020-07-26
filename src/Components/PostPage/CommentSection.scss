@@ -1,15 +1,13 @@
 .section--comments {
-    h3 {
-        text-indent: 2rem;
-    }
+    padding: 0 2rem;
     ul.comments-wrapper {
         margin: 0;
-        padding: 0 2rem;
+        padding: 0;
         list-style: none;
 
         li {
             position: relative;
-            margin: 1rem 1rem;
+            margin: 1rem 0;
             padding: 1rem 0;
             border-bottom: 1px solid #2EC4B6;
             .nickname {
@@ -38,13 +36,13 @@
         textarea.comment-input {
             display: block;
             height: 6rem;
-            margin: 1rem 2rem;
+            margin: 1rem 0;
             border: none;
             outline: none;
             background: none;
             border: 1px solid rgba(#2EC4B6,0.5);
             padding: 1rem;
-            width: calc(100% - 4rem);
+            width: 100%;
             resize: none;
             box-sizing: border-box;
             font-size: 1rem;
@@ -56,6 +54,7 @@
         button.comment-button {
             display: inline-block;
             float: right;
+            margin-bottom: 4rem;
             cursor: pointer;
             font-size: 1.25rem;
             line-height: 1;
@@ -68,9 +67,19 @@
             border-radius: 1.5rem;
             color: #EFFFE9;
             box-sizing: border-box;
-            margin-right: 2rem;
             &:hover {
                 background: rgba(#2EC4B6, 0.8);
+            }
+        }
+    }
+}
+
+@media (max-width: 876px) {
+    .section--comments {
+        padding: 0;
+        form.comment-form {
+            button.comment-button {
+                margin-bottom: 2rem;
             }
         }
     }

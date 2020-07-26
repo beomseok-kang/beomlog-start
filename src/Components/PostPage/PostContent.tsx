@@ -47,4 +47,4 @@ function PostContent({ post, isWriter, onClickDeleteButton, onClickEditButton }:
     );
 }
 
-export default PostContent;
+export default React.memo(PostContent);

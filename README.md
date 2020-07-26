@@ -19,6 +19,11 @@ You can check the tech log [here](https://lgphone.tistory.com/category/Else/Pers
 
 ## Version Log
 
+### Ver 1.0.1
+
+Some refactoring.
+Responsive design done.
+
 ### Ver 1.0.0
 
 Refactoring done.
